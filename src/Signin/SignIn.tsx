@@ -4,7 +4,7 @@ const SignIn = () => {
     <div className="flex justify-center items-center w-screen h-screen">
       <div className="bg-slate-900 rounded-2xl p-3 text-white font-semibold">
         <div className="text-center p-8 text-2xl flex flex-col items-center justify-center gap-3">
-          <img src={Wheel} alt="Logo" className="size-20 "/>
+          <img src={Wheel} alt="Logo" className="size-20 invert"/>
           <h1>Sign in to your account</h1>
         </div>
         <div className="flex flex-col gap-3">
