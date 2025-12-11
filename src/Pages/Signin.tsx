@@ -1,11 +1,13 @@
 import Wheel from "../assets/racing.png";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
   const collectInfo = [
     { name: "Name", type: "text" },
     { name: "Surname", type: "text" },
     { name: "Email Address", type: "text" },
-    { name: "Birthday", type: "date" },
+    { name: "Social Security Number", type: "text" },
+    { name: "Phone", type: "text" },
     { name: "Password", type: "text" },
   ];
 
@@ -26,9 +28,11 @@ const SignIn = () => {
               />
             </div>
           ))}
+          <Link to="/">
           <button className="w-full bg-indigo-700 rounded-lg cursor-pointer p-2 hover:bg-indigo-600 mt-2">
-            Create Account
+          Create Account
           </button>
+          </Link>
         </div>
       </div>
     </div>
