@@ -1,5 +1,5 @@
 import Wheel from "../assets/racing.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 const LogIn = () => {
   return (
