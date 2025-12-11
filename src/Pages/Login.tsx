@@ -1,12 +1,12 @@
 import Wheel from "../assets/racing.png";
 
-const SignIn = () => {
+const LogIn = () => {
   return (
     <div className="flex justify-center items-center w-screen h-screen bg-slate-950">
       <div className="bg-slate-900 rounded-2xl p-3 text-white font-semibold ">
         <div className="text-center p-8 text-2xl flex flex-col items-center justify-center gap-3">
           <img src={Wheel} alt="Logo" className="size-20 invert " />
-          <h1>Sign in to your account</h1>
+          <h1>Log in to your account</h1>
         </div>
         <div className="flex flex-col gap-3 px-2">
           <div className="flex flex-col gap-3">
@@ -55,4 +55,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default LogIn;
