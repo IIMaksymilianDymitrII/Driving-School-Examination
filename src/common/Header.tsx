@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useBooking } from "../context/BookingContext";
 import drivingWizardLogo from "../assets/driving-wizard-logo.png";
+import { useTheme } from "../context/ThemeContext";
+import ThemeButton from "../components/Header/ThemeButton";
 
 const Header: React.FC = () => {
   const { cart } = useBooking();
-
-  const [darkMode, setDarkMode] = useState(false);
-
-useEffect(() => {
-  if (darkMode) document.documentElement.classList.add("dark");
-  else document.documentElement.classList.remove("dark");
-}, [darkMode]);
-
+  const { themeColors } = useTheme();
 
   return (
-    <header className="border-b bg-white shadow-sm">
-        
+    <header className={`border-b shadow-sm ${themeColors.bg} ${themeColors.text}`}>
 
-      {/* Top signup strip */}
-      <div className="bg-blue-50 text-center py-2 text-sm">
+      <div className={`${themeColors.bg} text-center py-2 text-sm ${themeColors.text}`}>
         New student?{" "}
         <Link
           to="/register/step-1"
@@ -27,17 +20,11 @@ useEffect(() => {
         >
           Sign up here
         </Link>
-        {/* Dark Mode Toggle button */}
-        <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="px-4 py-2 bg-white/20 hover:bg-white/30 dark:bg-black/20 dark:hover:bg-black/40 rounded-lg backdrop-blur-md transition"
-        >
-            {darkMode ? "Light Mode ☀️" : "Dark Mode 🌙"}
-        </button>
+        <ThemeButton/>
       </div>
 
       {/* Main nav */}
-      <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div className={`max-w-5xl mx-auto px-4 py-3 flex items-center justify-between ${themeColors.text}`}>
        
         <Link
             to="/"

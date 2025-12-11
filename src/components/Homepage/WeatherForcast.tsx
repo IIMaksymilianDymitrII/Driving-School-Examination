@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTheme } from "../../context/ThemeContext";
 
 interface WeatherData {
   temperature: number;
@@ -6,6 +7,7 @@ interface WeatherData {
   weathercode: number;
 }
 const WeatherForcast = () => {
+  const { themeColors } = useTheme();
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [weatherMessage, setWeatherMessage] = useState<string>("Loading weather...");
 
@@ -39,8 +41,8 @@ const WeatherForcast = () => {
   }, []);
   return (
     <div>
-          <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col justify-between text-sm">
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">Weather & Driving Tip</h2>
+          <div className={` ${themeColors.bg} shadow-lg rounded-lg p-6 flex flex-col justify-between text-sm ${themeColors.text}`}>
+            <h2 className={`text-xl font-semibold mb-2 ${themeColors.text}`}>Weather & Driving Tip</h2>
             <div className="text-5xl font-bold text-blue-700">
                 {weather?.temperature}°C
             </div>
@@ -59,7 +61,7 @@ const WeatherForcast = () => {
 
             
             <br />
-            <p className="text-xs text-gray-500">
+            <p className={`text-xs ${themeColors.text}`}>
               Weather data: Stockholm, live from Open-Meteo. Always adapt speed and distance
               to road conditions.
             </p>

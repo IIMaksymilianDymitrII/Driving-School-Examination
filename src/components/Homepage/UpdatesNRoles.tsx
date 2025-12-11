@@ -1,12 +1,15 @@
 
+import { useTheme } from "../../context/ThemeContext";
+
 const UpdatesNRoles = () => {
+  const { themeColors } = useTheme();
   return (
-        <section className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
-          <h2 className="text-lg font-semibold mb-3">
+        <section className={` ${themeColors.bg} shadow rounded-lg p-6 ${themeColors.text}`}>
+          <h2 className={`text-lg font-semibold mb-3 ${themeColors.text}`}>
             Driving Rules & Updates
           </h2>
 
-          <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+          <ul className={`space-y-2 text-sm ${themeColors.text}`}>
             <li>
               • New rule: Use of mobile phone must be strictly hands-free while
               driving.
@@ -17,7 +20,7 @@ const UpdatesNRoles = () => {
             </li>
           </ul>
 
-          <h3 className="text-md font-semibold mt-4 mb-2">Important Links</h3>
+          <h3 className={`text-md font-semibold mt-4 mb-2 ${themeColors.text}`}>Important Links</h3>
 
           <ul className="text-blue-600 dark:text-blue-400 text-sm space-y-1">
             <li>
