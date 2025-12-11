@@ -13,18 +13,19 @@ interface ThemeContextType {
   };
 }
 
-const themeColor: Record<Theme, { bg: string; bgHover: string; text: string }> = {
-  Dark: {
-    bg: "bg-black/80",
-    bgHover: "hover:bg-black/40",
-    text: "text-white",
-  },
-  Light: {
-    bg: "bg-white/20",
-    bgHover: "hover:bg-white/40",
-    text: "text-black",
-  },
-};
+const themeColor: Record<Theme, { bg: string; bgHover: string; text: string }> =
+  {
+    Dark: {
+      bg: "bg-black/80",
+      bgHover: "hover:bg-black/40",
+      text: "text-white",
+    },
+    Light: {
+      bg: "bg-white/20",
+      bgHover: "hover:bg-white/40",
+      text: "text-black",
+    },
+  };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
