@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { type Request, type Response } from "express";
 import cors from "cors";
 import jwt from "jsonwebtoken";
 
@@ -9,12 +9,12 @@ app.use(cors());
 const SECRET =  import.meta.env.VITE_SECRET
 
 app.post("/login", (req: Request, res: Response) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (username !== "demo" || password !== "1234") {
+  if (email !== "demo" || password !== "1234") {
     return res.status(400).json({ message: "Invalid credentials" });
   }
-  const token = jwt.sign({ user: username }, SECRET, { expiresIn: "1h" });
+  const token = jwt.sign({ user: email }, SECRET, { expiresIn: "1h" });
   res.json({ token });
 });
 
@@ -26,7 +26,7 @@ app.get("/dashboard", (req: Request, res: Response) => {
 
   const token = auth.split(" ")[1];
 
-  jwt.verify(token, SECRET, (err: Error, decoded: any) => {
+  jwt.verify(token, SECRET, (err: any, decoded: any) => {
     if (err) return res.status(403).json({ message: "Invalid token" });
     res.json({ message: "Access granted", user: decoded.user });
   });
