@@ -1,14 +1,17 @@
 import express, { type Request, type Response } from "express";
 import cors from "cors";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-const SECRET =  import.meta.env.VITE_SECRET
+const SECRET: string = process.env.SECRET! 
 
-app.post("/login", (req: Request, res: Response) => {
+app.post("/", (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   if (email !== "demo" || password !== "1234") {
@@ -26,9 +29,9 @@ app.get("/dashboard", (req: Request, res: Response) => {
 
   const token = auth.split(" ")[1];
 
-  jwt.verify(token, SECRET, (err: any, decoded: any) => {
+  jwt.verify(token, SECRET, (err: any ) => {
     if (err) return res.status(403).json({ message: "Invalid token" });
-    res.json({ message: "Access granted", user: decoded.user });
+    res.json({ message: "Access granted", user: "user"});
   });
 });
 

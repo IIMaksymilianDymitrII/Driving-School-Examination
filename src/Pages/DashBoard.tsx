@@ -14,7 +14,11 @@ const DashBoard = () => {
       .then((res) => setInfo(res.data.message));
   }, []);
 
-  return <h1>{info}</h1>;
+  return(
+    <div className="flex justify-center items-center text-5xl text-black">
+        <h1>{info}</h1>
+    </div>
+  )
 };
 
 export default DashBoard;
