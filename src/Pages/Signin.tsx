@@ -4,10 +4,7 @@ import { Link } from "react-router-dom";
 const SignIn = () => {
   const collectInfo = [
     { name: "Name", type: "text" },
-    { name: "Surname", type: "text" },
     { name: "Email Address", type: "text" },
-    { name: "Social Security Number", type: "text" },
-    { name: "Phone", type: "text" },
     { name: "Password", type: "text" },
   ];
 

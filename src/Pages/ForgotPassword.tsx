@@ -21,7 +21,7 @@ const ForgotPassword = () => {
             </div>
             <div className="flex flex-col gap-1 ">
               <div className="flex justify-between">
-                <h2>Password</h2>
+                <h2>Create New Password</h2>
               </div>
               <input
                 type="text"
