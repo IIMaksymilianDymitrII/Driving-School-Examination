@@ -1,8 +1,8 @@
 import React from "react"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRegistrationForm } from "../hooks/useRegistrationForm";
-import CancelModal from "../common/CancelModal";
+import { useRegistrationForm } from "../../hooks/useRegistrationForm";
+import CancelModal from "../../common/CancelModal";
 
 const Step1Personal: React.FC = () => {
   const { formData, updateField, resetForm } = useRegistrationForm();
