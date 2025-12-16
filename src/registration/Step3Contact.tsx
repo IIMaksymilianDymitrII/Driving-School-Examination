@@ -21,7 +21,7 @@ const Step3Contact: React.FC = () => {
 
   const handleCancelConfirm = () => {
     resetForm();
-    navigate(-1);
+    navigate("/"); // go to home
   };
 
   const emailBorderClass = emailHasAt

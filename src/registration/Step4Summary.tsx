@@ -17,7 +17,8 @@ const Step4Summary: React.FC = () => {
   const handleCancelConfirm = () => {
     resetForm();
     setShowCancel(false);
-    navigate(-1);
+    //navigate(-1);
+    navigate("/");
   };
 
   return (

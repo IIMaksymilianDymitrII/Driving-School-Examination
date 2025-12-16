@@ -16,7 +16,7 @@ const Step2Address: React.FC = () => {
 
   const handleCancelConfirm = () => {
     resetForm();
-    navigate(-1);
+    navigate("/"); // go to home
   };
 
   const handleNext = (e: React.FormEvent) => {
