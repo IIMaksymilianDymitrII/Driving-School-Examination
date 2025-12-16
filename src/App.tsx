@@ -2,12 +2,13 @@ import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Header from "./common/Header";
 import HomePage from "./pages/HomePage";
+import SchedulePage from "./pages/SchedulePage";
 import { useTheme } from "./context/ThemeContext";
 
-import Step1Personal from "./registration/Step1Personal";
-import Step2Address from "./registration/Step2Address";
-import Step3Contact from "./registration/Step3Contact";
-import Step4Summary from "./registration/Step4Summary";
+import Step1Personal from "./pages/Registrationpages/Step1Personal";
+import Step2Address from "./pages/Registrationpages/Step2Address";
+import Step3Contact from "./pages/Registrationpages/Step3Contact";
+import Step4Summary from "./pages/Registrationpages/Step4Summary";
 import { RegistrationFormProvider } from "./context/RegistrationFormContext";
 
 
@@ -18,7 +19,9 @@ const App: React.FC = () => {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        
+        <Route path="/schedules" element={<SchedulePage />} />
+
+
         <Route
           path="/register/*"
           element={
@@ -32,7 +35,7 @@ const App: React.FC = () => {
             </RegistrationFormProvider>
           }
         />
-
+        
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
