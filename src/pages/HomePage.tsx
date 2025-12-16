@@ -1,11 +1,11 @@
 import { useBooking } from "../context/BookingContext";
 import { useTheme } from "../context/ThemeContext";
-import WeatherForcast from "../components/Homepage/WeatherForcast";
-import DrivingQuote from "../components/Homepage/DrivingQuote";
-import UpdatesNRoles from "../components/Homepage/UpdatesNRoles";
-import NextLesson from "../components/Homepage/NextLesson";
-import UpcommingEvent from "../components/Homepage/UpcommingEvent";
-import NextAvailableLesson from "../components/Homepage/NextAvailableLesson";
+import WeatherForcast from "../components/PageHome/WeatherForcast";
+import DrivingQuote from "../components/PageHome/DrivingQuote";
+import UpdatesNRoles from "../components/PageHome/UpdatesNRoles";
+import NextLesson from "../components/PageHome/NextLesson";
+import UpcommingEvent from "../components/PageHome/UpcommingEvent";
+import NextAvailableLesson from "../components/PageHome/NextAvailableLesson";
 
 const HomePage: React.FC = () => {
   const { todayNextLesson, nextAvailableThisWeek } = useBooking();
