@@ -5,7 +5,10 @@ const NextLesson = ({ todayNextLesson }: { todayNextLesson: Lesson | null }) => 
   const { themeColors } = useTheme();
 
   return (
-          <div className={` ${themeColors.bg} shadow-lg rounded-lg p-5 text-sm ${themeColors.text}`}>
+          <div
+  className={`${themeColors.surface} border ${themeColors.border} rounded-xl p-5 text-sm`}
+>
+
             <h3 className={`text-base font-semibold mb-3 ${themeColors.text}`}>
               Today&apos;s Next Lesson
             </h3>
@@ -29,7 +32,8 @@ const NextLesson = ({ todayNextLesson }: { todayNextLesson: Lesson | null }) => 
                 </p>
               </div>
             ) : (
-              <p className={`${themeColors.text}`}>No lesson booked today.</p>
+              <p className={`${themeColors.text} opacity-60`}>No lesson booked today.</p>
+
             )}
           </div>
   )
