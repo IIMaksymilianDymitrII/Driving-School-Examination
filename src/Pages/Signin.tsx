@@ -6,8 +6,8 @@ import { useAuth } from "../Context/UserInfoContext";
 
 const signinLink: string = "http://localhost:5000/signin";
 
-
 const SignIn = () => {
+  
 
   const collectInfo = [
     { name: "Name", type: "text" },
