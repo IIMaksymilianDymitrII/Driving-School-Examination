@@ -1,4 +1,7 @@
 import React from "react";
+import { useTheme } from "../../context/ThemeContext";
+
+
 import {
   startOfMonth,
   endOfMonth,
@@ -45,15 +48,33 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
     day = addDays(day, 1);
   }
 
+  const { themeColors } = useTheme();
+
   return (
-    <div className="border rounded-lg shadow overflow-hidden">
+    <div className={`rounded-xl border ${themeColors.border} ${themeColors.surface} overflow-hidden`}>
+
       {/* Month Title */}
-      <div className="bg-blue-600 text-white py-3 text-center font-semibold text-lg">
+      {/* <div className="bg-blue-600 text-white py-3 text-center font-semibold text-lg"> */}
+      <div
+        className="
+          py-3 text-center font-semibold text-lg
+          bg-blue-600 text-white
+          dark:bg-slate-800 dark:text-slate-100
+        "
+      >
         {format(monthStart, "MMMM yyyy")}
       </div>
 
       {/* Weekday headers */}
-      <div className="grid grid-cols-7 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+      {/* <div className="grid grid-cols-7 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200"> */}
+      <div
+        className="
+          grid grid-cols-7
+          bg-gray-100 text-gray-800
+          dark:bg-slate-900 dark:text-slate-200
+          border-b border-gray-200 dark:border-slate-700
+        "
+      >
         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
           <div key={d} className="py-2 font-semibold text-sm text-center">
             {d}

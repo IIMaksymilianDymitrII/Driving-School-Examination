@@ -4,6 +4,8 @@ import { useBooking } from "../../context/BookingContext";
 import { mapEventToLesson } from "../../utils/mapEventToLesson";
 import { format } from "date-fns";
 
+import { useTheme } from "../../context/ThemeContext";
+
 interface EventModalProps {
   event: Event | null;
   onClose: () => void;
@@ -11,6 +13,7 @@ interface EventModalProps {
 
 const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
   const { addToCart } = useBooking();
+  const { themeColors } = useTheme();
 
   if (!event) return null;
 
@@ -20,36 +23,77 @@ const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
     onClose();
   };
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full overflow-hidden">
-
+    return (
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+      <div
+        className="
+          w-full max-w-md rounded-lg shadow-xl overflow-hidden
+          bg-white text-gray-900
+          dark:bg-slate-900 dark:text-slate-100
+        "
+      >
         {/* HEADER */}
-        <div className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center">
+        <div
+          className="
+            px-4 py-3 flex justify-between items-center
+            bg-blue-600 text-white
+            dark:bg-slate-800
+          "
+        >
           <div>
             <h2 className="text-xl font-semibold">{event.title}</h2>
-            <p className="text-sm opacity-80">
+            <p className="text-sm opacity-90">
               {format(new Date(event.date), "d MMMM yyyy")} • {event.time}
             </p>
           </div>
-          <button onClick={onClose} className="text-white text-2xl font-bold">×</button>
+
+          <button
+            onClick={onClose}
+            className="text-2xl font-bold hover:opacity-80"
+          >
+            ×
+          </button>
         </div>
 
         {/* BODY */}
-        <div className="p-4 text-gray-700 dark:text-gray-200 text-sm space-y-3">
-          <p><strong>Instructor:</strong> {event.instructor}</p>
-          <p><strong>Location:</strong> {event.location || "Driving school"}</p>
+        <div className="p-4 text-sm space-y-3">
+          <p>
+            <span className="font-semibold">Instructor:</span>{" "}
+            {event.instructor}
+          </p>
+          <p>
+            <span className="font-semibold">Location:</span>{" "}
+            {event.location || "Driving school"}
+          </p>
         </div>
 
         {/* FOOTER */}
-        <div className="p-4 bg-gray-100 dark:bg-gray-700 flex justify-end gap-2">
-          <button onClick={onClose} className="px-4 py-2 rounded bg-gray-300 dark:bg-gray-600">
+        <div
+          className="
+            p-4 flex justify-end gap-2
+            bg-gray-100
+            dark:bg-slate-800
+          "
+        >
+          <button
+            onClick={onClose}
+            className="
+              px-4 py-2 rounded
+              bg-gray-300 text-gray-900
+              hover:bg-gray-400
+              dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600
+            "
+          >
             Close
           </button>
 
           <button
             onClick={handleAddToCart}
-            className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+            className="
+              px-4 py-2 rounded
+              bg-green-600 text-white
+              hover:bg-green-700
+            "
           >
             Add to Cart
           </button>
@@ -57,6 +101,7 @@ const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
       </div>
     </div>
   );
+
 };
 
 export default EventModal;

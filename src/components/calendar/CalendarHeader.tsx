@@ -1,5 +1,6 @@
 import React from "react";
 import { format, addMonths, subMonths } from "date-fns";
+import { useTheme } from "../../context/ThemeContext";
 
 interface CalendarHeaderProps {
   currentDate: Date;
@@ -14,24 +15,28 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   darkMode,
   toggleDarkMode,
 }) => {
+  const { themeColors } = useTheme();
+
   return (
     <div className="flex items-center justify-between mb-4">
       {/* Prev / Next Buttons */}
       <div className="flex items-center gap-2">
         <button
           onClick={() => setCurrentDate(subMonths(currentDate, 1))}
-          className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
+          className={`px-3 py-1 rounded border ${themeColors.border} ${themeColors.elevated} ${themeColors.text} hover:${themeColors.bgHover}`}
+
         >
           ← Prev
         </button>
 
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+        {/* <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100"> */}
+        <h2 className={`text-xl font-semibold ${themeColors.text}`}>
           {format(currentDate, "MMMM yyyy")}
         </h2>
 
         <button
           onClick={() => setCurrentDate(addMonths(currentDate, 1))}
-          className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
+          className={`px-3 py-1 rounded border ${themeColors.border} ${themeColors.elevated} ${themeColors.text} hover:${themeColors.bgHover}`}
         >
           Next →
         </button>

@@ -2,6 +2,7 @@ import React from "react";
 import { format } from "date-fns";
 import CalendarEvent from "./CalendarEvent";
 import type { Event } from "../../types/Event";
+import { useTheme } from "../../context/ThemeContext";
 
 interface CalendarDayProps {
   day: Date;
@@ -18,16 +19,29 @@ const CalendarDay: React.FC<CalendarDayProps> = ({
   onEventClick,
   onDateClick, // added prop
 }) => {
+  const { themeColors } = useTheme();
   return (
     <div 
       // onClick={() => {
       //   if (events.length > 0) onEventClick(events[0]);
       // }}
-      className={`h-28 p-1 border dark:border-gray-700 text-left relative overflow-hidden 
-      ${isCurrentMonth ? "bg-white dark:bg-gray-800" : "bg-gray-100 dark:bg-gray-700 text-gray-400"}`}
+      // className={`h-28 p-1 border dark:border-gray-700 text-left relative overflow-hidden 
+      // ${isCurrentMonth ? "bg-white dark:bg-gray-800" : "bg-gray-100 dark:bg-gray-700 text-gray-400"}`}
+
+      className={`h-28 p-2 border ${themeColors.border}
+      ${isCurrentMonth ? themeColors.surface : themeColors.elevated}`}
+
       onClick={onDateClick}
     >
-      <div className="text-xs font-semibold">{format(day, "d")}</div>
+      {/* <div className="text-xs font-semibold">{format(day, "d")}</div> */}
+      <div
+        className={`text-xs font-semibold ${
+          isCurrentMonth ? themeColors.text : themeColors.textMuted
+        }`}
+      >
+        {format(day, "d")}
+      </div>
+
 
       <div className="mt-1 space-y-1 overflow-hidden">
         {events.map((ev) => (
