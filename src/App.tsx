@@ -15,7 +15,7 @@ import { RegistrationFormProvider } from "./context/RegistrationFormContext";
 const App: React.FC = () => {
   const { themeColors } = useTheme();
   return (
-    <div className={`min-h-screen ${themeColors.bg} ${themeColors.text}`}>
+    <div className={`min-h-screen ${themeColors.bg}`}>
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
