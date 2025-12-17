@@ -17,9 +17,8 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header
-      className={`border-b shadow-sm ${themeColors.bg} ${themeColors.text}`}
-    >
+    <header className={`border-b ${themeColors.border} ${themeColors.surface}`}>
+
       <div
         className={` flex justify-center items-center text-center py-2 text-sm ${themeColors.text}`}
       >
@@ -59,7 +58,8 @@ const Header: React.FC = () => {
               to={page.link}
               className={({ isActive }) =>
                 `hover:text-blue-700 ${
-                  isActive ? "font-semibold text-blue-700" : "text-gray-700"
+                  isActive ? themeColors.accent : themeColors.textMuted
+
                 }`
               }
             >
