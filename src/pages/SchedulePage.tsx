@@ -6,7 +6,11 @@ import ScheduleSearch from "../components/PageSchedule/ScheduleSearch";
 import ScheduleCalendar from "../components/PageSchedule/ScheduleCalendar";
 import ScheduleEventSection from "../components/PageSchedule/ScheduleEventSection";
 
+import { useTheme } from "../context/ThemeContext";
+
 const SchedulePage: React.FC = () => {
+  const { themeColors } = useTheme();
+
   const {
     currentDate,
     setCurrentDate,
@@ -20,7 +24,7 @@ const SchedulePage: React.FC = () => {
   } = useSchedule(scheduleEvents);
 
   return (
-    <main className="min-h-screen bg-gray-100 dark:bg-gray-900 p-4">
+    <main className={`min-h-screen ${themeColors.bg} p-4`}>
       <div className="max-w-5xl mx-auto space-y-6">
         <ScheduleSearch
           value={searchQuery}
