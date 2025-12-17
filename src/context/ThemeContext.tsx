@@ -13,19 +13,43 @@ interface ThemeContextType {
   };
 }
 
-const themeColor: Record<Theme, { bg: string; bgHover: string; text: string }> =
-  {
-    Dark: {
-      bg: "bg-black/80",
-      bgHover: "hover:bg-black/40",
-      text: "text-white",
-    },
-    Light: {
-      bg: "bg-white/20",
-      bgHover: "hover:bg-white/40",
-      text: "text-black",
-    },
-  };
+// const themeColor: Record<Theme, { bg: string; bgHover: string; text: string }> =
+//   {
+//     Dark: {
+//       bg: "bg-black/80",
+//       bgHover: "hover:bg-black/40",
+//       text: "text-white",
+//     },
+//     Light: {
+//       bg: "bg-white/20",
+//       bgHover: "hover:bg-white/40",
+//       text: "text-black",
+//     },
+//   };
+
+const themeColor = {
+  Dark: {
+    bg: "bg-slate-900",
+    surface: "bg-gray-900",
+    elevated: "bg-gray-800",
+    border: "border-gray-800",
+    text: "text-gray-200",
+    textMuted: "text-gray-400",
+    accent: "text-blue-400",
+    bgHover: "hover:bg-gray-800",
+  },
+  Light: {
+    bg: "bg-gray-50",
+    surface: "bg-white",
+    elevated: "bg-gray-100",
+    border: "border-gray-200",
+    text: "text-gray-900",
+    textMuted: "text-gray-600",
+    accent: "text-blue-600",
+    bgHover: "hover:bg-gray-100",
+  },
+};
+
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
