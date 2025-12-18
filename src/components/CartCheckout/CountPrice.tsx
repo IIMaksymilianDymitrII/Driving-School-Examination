@@ -1,9 +1,11 @@
 import { useTheme } from "../../context/ThemeContext";
 import { useBooking } from "../../context/BookingContext";
+import { useNavigate } from "react-router-dom";
 
-const Checkout = () => {
+const CountPrice = () => {
   const { cart } = useBooking();
   const { themeColors } = useTheme();
+  const nav = useNavigate()
 
   const subtotal = cart.reduce((sum, lesson) => {
     const price = lesson.price;
@@ -36,6 +38,7 @@ const Checkout = () => {
       <h3>{totalPrice} kr</h3>
       </div>
       <button
+      onClick={() => nav("/checkout")}
         className="px-3 py-1 text-md font-semibold rounded
            bg-green-600 text-white hover:bg-green-700
             focus:ring-2 focus:ring-green-400 mt-2"
@@ -46,4 +49,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default CountPrice;

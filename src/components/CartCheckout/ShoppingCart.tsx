@@ -1,6 +1,6 @@
 import { useBooking } from "../../context/BookingContext"
 import Lesson from "./Lesson"
-import Checkout from "./Checkout"
+import CountPrice from "./CountPrice"
 
 const ShoppingCart = () => {
   const {cart, removeFromCart} = useBooking()
@@ -23,7 +23,7 @@ const ShoppingCart = () => {
         }
         </ul>
         </section>
-        <Checkout/>
+        <CountPrice/>
       </section>
   )
 }

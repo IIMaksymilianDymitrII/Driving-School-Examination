@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import SchedulePage from "./pages/SchedulePage";
 import { useTheme } from "./context/ThemeContext";
 import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 const App: React.FC = () => {
   const { themeColors } = useTheme();
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/schedules" element={<SchedulePage />} />
         <Route path="/cart" element={<CartPage/>} />
+        <Route path="/checkout" element={<CheckoutPage/>} />
         
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -35,12 +35,12 @@ const Lesson = ({
         <div className={`${themeColors.textMuted}`}>
           <p>Instructor: {instructor}</p>
           <p>Location: {location}</p>
-          <p>Time: {time} </p>
           <p>Date: {date}</p>
+          <p>Time: {time} </p>
         </div>
       </div>
       <div className="grid grid-row-2 content-between ">
-        <p className="font-semibold">{price} kr</p>
+        <p className="font-semibold text-lg">{price} kr</p>
         <button onClick={() => remove(id)} className={`hover:text-gray-400`}>
           Remove
         </button>
