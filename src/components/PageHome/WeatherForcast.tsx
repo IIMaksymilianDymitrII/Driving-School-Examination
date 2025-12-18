@@ -41,7 +41,7 @@ const WeatherForcast = () => {
   }, []);
   return (
     <div>
-          <div className={` ${themeColors.bg} shadow-lg rounded-lg p-6 flex flex-col justify-between text-sm ${themeColors.text}`}>
+          <div className={` ${themeColors.bgWidget} shadow-lg rounded-lg p-6 flex flex-col justify-between text-sm ${themeColors.border} border ${themeColors.text}`}>
             <h2 className={`text-xl font-semibold mb-2 ${themeColors.text}`}>Weather & Driving Tip</h2>
             <div className="text-5xl font-bold text-blue-700">
                 {weather?.temperature}°C

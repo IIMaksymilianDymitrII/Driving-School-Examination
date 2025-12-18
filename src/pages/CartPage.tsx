@@ -25,7 +25,7 @@ const CartPage = () => {
                 Title type of drive
               </h2>
               <div className={`${themeColors.textMuted}`}>
-              <p >date and time</p>
+              <p>date and time</p>
               <p>Instructor</p>
               <p>location</p>
               </div>

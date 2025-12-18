@@ -6,7 +6,7 @@ const NextLesson = ({ todayNextLesson }: { todayNextLesson: Lesson | null }) => 
 
   return (
           <div
-  className={`${themeColors.surface} border ${themeColors.border} rounded-xl p-5 text-sm`}
+  className={`${themeColors.bgWidget} shadow-lg rounded-lg p-5 text-sm ${themeColors.text} ${themeColors.border} border`}
 >
 
             <h3 className={`text-base font-semibold mb-3 ${themeColors.text}`}>

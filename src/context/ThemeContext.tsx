@@ -47,7 +47,7 @@ const themeColor = {
   },
   Light: {
     bg: "bg-gray-50",
-    bgWidget:"bg-[#111827]",
+    bgWidget:"bg-white",
     surface: "bg-white",
     elevated: "bg-gray-100",
     border: "border-gray-200",

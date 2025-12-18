@@ -4,7 +4,7 @@ import { useTheme } from "../../context/ThemeContext";
 const UpdatesNRoles = () => {
   const { themeColors } = useTheme();
   return (
-        <section className={` ${themeColors.bg} shadow rounded-lg p-6 ${themeColors.text}`}>
+        <section className={` ${themeColors.bgWidget} shadow rounded-lg p-6 ${themeColors.text} ${themeColors.border} border`}>
           <h2 className={`text-lg font-semibold mb-3 ${themeColors.text}`}>
             Driving Rules & Updates
           </h2>
