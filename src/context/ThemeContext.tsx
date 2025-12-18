@@ -7,9 +7,15 @@ interface ThemeContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
   themeColors: {
-    bg: string;
-    bgHover: string;
-    text: string;
+    bg: string
+    bgWidget:string
+    surface:string
+    elevated: string
+    border: string
+    text:string
+    textMuted:string
+    accent: string
+    bgHover:string 
   };
 }
 
@@ -30,6 +36,7 @@ interface ThemeContextType {
 const themeColor = {
   Dark: {
     bg: "bg-slate-900",
+    bgWidget:"bg-[#111827]",
     surface: "bg-gray-900",
     elevated: "bg-gray-800",
     border: "border-gray-800",
@@ -40,6 +47,7 @@ const themeColor = {
   },
   Light: {
     bg: "bg-gray-50",
+    bgWidget:"bg-[#111827]",
     surface: "bg-white",
     elevated: "bg-gray-100",
     border: "border-gray-200",

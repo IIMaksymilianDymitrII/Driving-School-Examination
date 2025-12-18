@@ -14,7 +14,8 @@ const HomePage: React.FC = () => {
     <main className={`min-h-screen ${themeColors.bg}`}>
       <div className={`max-w-5xl mx-auto px-4 py-6 space-y-6`}>
 
-        <section className={`grid md:grid-cols-3 gap-6 animate-[slideIn_0.3s_ease-out] ${themeColors.text}`}>
+        <section className={`grid md:grid-cols-3 gap-6 
+          animate-[slideIn_0.3s_ease-out] ${themeColors.text}`}>
           <DrivingQuote />
           <WeatherForcast />
         </section>
