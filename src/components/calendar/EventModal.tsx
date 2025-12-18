@@ -62,6 +62,10 @@ const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
             <span className="font-semibold">Location:</span>{" "}
             {event.location || "Driving school"}
           </p>
+          <p>
+            <span className="font-semibold">Price:</span>{" "}
+            {event.price} kr
+          </p>
         </div>
 
         {/* FOOTER */}
