@@ -5,5 +5,6 @@ export interface Event {
   title: string;
   instructor: string;
   location?: string;
+  price: number;
   notes?: string;
 }

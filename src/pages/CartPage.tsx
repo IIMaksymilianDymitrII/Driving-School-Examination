@@ -1,9 +1,11 @@
 import { useTheme } from "../context/ThemeContext";
-import Lesson from "../components/CartCheckout/Lesson";
-import Checkout from "../components/CartCheckout/Checkout";
-// className={``}
+import { useBooking } from "../context/BookingContext";
+import ShoppingCart from "../components/CartCheckout/ShoppingCart";
+
 const CartPage = () => {
+  const { cart} = useBooking();
   const { themeColors } = useTheme();
+
   return (
     <main className={`min-h-screen ${themeColors.text} `}>
       <section className="">
@@ -11,19 +13,7 @@ const CartPage = () => {
           <h1 className="text-3xl font-semibold p-10">Your Shopping Cart</h1>
         </div>
       </section>
-      <section
-        className={`max-w-5xl mx-auto grid md:grid-cols-3 gap-6 
-        animate-[slideIn_0.3_ease-out] `}
-      >
-        <section 
-          className={`md:col-span-2 max-h-[700px] overflow-y-auto`}>
-        <ul className="grid gap-3"
-        >
-          <Lesson/>
-        </ul>
-        </section>
-        <Checkout/>
-      </section>
+      {cart.length === 0 ? <p className="flex justify-center items-center text-4xl h-[500px]">Your Cart is Empty</p> : <ShoppingCart />}
     </main>
   );
 };

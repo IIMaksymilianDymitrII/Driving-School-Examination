@@ -4,8 +4,6 @@ import { useBooking } from "../../context/BookingContext";
 import { mapEventToLesson } from "../../utils/mapEventToLesson";
 import { format } from "date-fns";
 
-import { useTheme } from "../../context/ThemeContext";
-
 interface EventModalProps {
   event: Event | null;
   onClose: () => void;
@@ -13,7 +11,6 @@ interface EventModalProps {
 
 const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
   const { addToCart } = useBooking();
-  const { themeColors } = useTheme();
 
   if (!event) return null;
 
