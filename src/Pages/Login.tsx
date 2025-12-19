@@ -24,8 +24,23 @@ const LogIn = () => {
   };
 
   const googleAuth = useGoogleLogin({
-    onSuccess: (tokenResponse) => console.log(tokenResponse),
-    onError: () => console.log("Login Failed"),
+    onSuccess: async (tokenResponse) => {
+    try {
+      const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+        headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+      });
+
+      const { email, name } = res.data;
+
+      const backendRes = await axios.post("http://localhost:5000/google-login", { email, name });
+
+      localStorage.setItem("token", backendRes.data.token);
+      nav("/dashboard");
+    } catch (err) {
+      console.error(err);
+    }
+  },
+  onError: () => console.log("Login Failed"),
   });
 
   return (

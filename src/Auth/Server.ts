@@ -44,10 +44,11 @@ app.post("/signin", async (req: Request, res: Response) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
-    await db.run(
-      "INSERT INTO users (email, password, name) VALUES (?,?,?)",
-      [email, hashedPassword, name]
-    );
+    await db.run("INSERT INTO users (email, password, name) VALUES (?,?,?)", [
+      email,
+      hashedPassword,
+      name,
+    ]);
 
     res.status(201).json({
       message: "User has been created",
@@ -90,6 +91,31 @@ app.get("/dashboard", async (req: Request, res: Response) => {
   });
 });
 
+app.post("/google-login", async (req: Request, res: Response) => {
+  const { email, name } = req.body;
+
+  if (!email || !name) {
+    return res.status(400).json({ error: "Email and name required" });
+  }
+
+  try {
+    const user = await db.get("SELECT * FROM users WHERE email = ?", [email]);
+
+    if (!user) {
+      await db.run(
+        "INSERT INTO users (email, password, name) VALUES (?, ?, ?)",
+        [email, "", name]
+      );
+    }
+    const token = jwt.sign({ email, name }, SECRET, { expiresIn: "1h" });
+
+    res.json({ token, message: "Logged in via Google" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Google login failed" });
+  }
+});
+
 app.get("/users", async (req: Request, res: Response) => {
   try {
     const users = await db.all("SELECT * FROM users");
@@ -100,6 +126,45 @@ app.get("/users", async (req: Request, res: Response) => {
   }
 });
 
+app.post("/forgotpassword", async (req: Request, res: Response) => {
+  const { email } = req.body;
+
+  if (!email) return res.status(400).json({ error: "Email required" });
+
+  const user = await db.get("SELECT * FROM users WHERE email = ?", [email]);
+  if (!user) return res.status(404).json({ error: "User not found" });
+
+  const resetToken = jwt.sign({ email: user.email }, SECRET, {
+    expiresIn: "15m",
+  });
+
+  res.json({ message: "Password reset token created", resetToken });
+});
+
+app.post("/resetpassword", async (req: Request, res: Response) => {
+  const { token, newPassword } = req.body;
+
+  if (!token || !newPassword)
+    return res.status(400).json({ error: "Token and new password required" });
+
+  try {
+    const decoded = jwt.verify(token, SECRET) as { email: string };
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    await db.run("UPDATE users SET password = ? WHERE email = ?", [
+      hashedPassword,
+      decoded.email,
+    ]);
+
+    res.json({ message: "Password updated successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ error: "Invalid or expired token" });
+  }
+});
+
 initDB().then(() => {
-  app.listen(5000, () => console.log("Server running on http://localhost:5000"));
+  app.listen(5000, () =>
+    console.log("Server running on http://localhost:5000")
+  );
 });
