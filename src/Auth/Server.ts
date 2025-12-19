@@ -90,6 +90,16 @@ app.get("/dashboard", async (req: Request, res: Response) => {
   });
 });
 
+app.get("/users", async (req: Request, res: Response) => {
+  try {
+    const users = await db.all("SELECT * FROM users");
+    res.json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Could not fetch users" });
+  }
+});
+
 initDB().then(() => {
   app.listen(5000, () => console.log("Server running on http://localhost:5000"));
 });
