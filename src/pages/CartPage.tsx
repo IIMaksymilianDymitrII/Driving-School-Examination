@@ -1,6 +1,6 @@
 import { useTheme } from "../context/ThemeContext";
 import { useBooking } from "../context/BookingContext";
-import ShoppingCart from "../components/CartCheckout/ShoppingCart";
+import ShoppingCart from "../components/Cart/ShoppingCart";
 
 const CartPage = () => {
   const { cart} = useBooking();
