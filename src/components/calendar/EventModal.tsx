@@ -22,6 +22,11 @@ const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
     // onClose();
   };
 
+  const handleClose = () => {
+    setAdded(false);
+    onClose();
+  };
+
     return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
       <div
@@ -47,7 +52,8 @@ const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
           </div>
 
           <button
-            onClick={onClose}
+            // onClick={onClose}
+            onClick={handleClose}
             className="text-2xl font-bold hover:opacity-80"
           >
             ×
@@ -70,12 +76,12 @@ const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
           </p>
         </div>
 
-        {/* SUCCESS MESSAGE */}
+        {/* SUCCESS MESSAGE
         {added && (
           <div className="mx-4 mb-3 p-3 rounded bg-green-600 text-white text-sm text-center">
             Lesson added to cart successfully
           </div>
-        )}
+        )} */}
 
 
         {/* FOOTER */}
@@ -87,7 +93,8 @@ const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
           "
         >
           <button
-            onClick={onClose}
+            // onClick={onClose}
+            onClick={handleClose}
             className="
               px-4 py-2 rounded
               bg-gray-300 text-gray-900
@@ -98,7 +105,7 @@ const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
             Close
           </button>
 
-          <button
+          {/* <button
             onClick={handleAddToCart}
             disabled={added}
 
@@ -113,8 +120,23 @@ const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
             `}
           >
             {/* Add to Cart */}
-            {added ? "Added to Cart" : "Add to Cart"}
-          </button>
+            {/* {added ? "Added to Cart" : "Add to Cart"} */}
+          {/* </button> */}
+
+          {/* // Alternative rendering based on 'added' state */}
+          {added ? (
+            <p className="text-green-600 font-semibold text-sm">
+              Lesson added to cart successfully
+            </p>
+          ) : (
+            <button
+              onClick={handleAddToCart}
+              className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+            >
+              Add to Cart
+            </button>
+          )}
+
         </div>
       </div>
     </div>
