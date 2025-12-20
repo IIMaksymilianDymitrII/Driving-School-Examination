@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import type { Event } from "../../types/Event";
 import { useBooking } from "../../context/BookingContext";
 import { mapEventToLesson } from "../../utils/mapEventToLesson";
@@ -11,13 +11,15 @@ interface EventModalProps {
 
 const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
   const { addToCart } = useBooking();
+  const [added, setAdded] = useState(false);
 
   if (!event) return null;
 
   const handleAddToCart = () => {
     const lesson = mapEventToLesson(event);
     addToCart(lesson);
-    onClose();
+    setAdded(true);
+    // onClose();
   };
 
     return (
@@ -68,6 +70,14 @@ const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
           </p>
         </div>
 
+        {/* SUCCESS MESSAGE */}
+        {added && (
+          <div className="mx-4 mb-3 p-3 rounded bg-green-600 text-white text-sm text-center">
+            Lesson added to cart successfully
+          </div>
+        )}
+
+
         {/* FOOTER */}
         <div
           className="
@@ -90,13 +100,20 @@ const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
 
           <button
             onClick={handleAddToCart}
-            className="
+            disabled={added}
+
+            // className="
+            //   px-4 py-2 rounded
+            //   bg-green-600 text-white
+            //   hover:bg-green-700
+            // "
+            className={`
               px-4 py-2 rounded
-              bg-green-600 text-white
-              hover:bg-green-700
-            "
+              ${added ? "bg-green-800 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"} text-white
+            `}
           >
-            Add to Cart
+            {/* Add to Cart */}
+            {added ? "Added to Cart" : "Add to Cart"}
           </button>
         </div>
       </div>
