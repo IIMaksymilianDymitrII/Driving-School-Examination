@@ -64,7 +64,24 @@ const Header: React.FC = () => {
               }
             >
               {" "}
-              {page.name}
+              {/* {page.name} */}
+
+              {/* // Special handling for Cart to show item count */}
+              {page.name === "Cart" ? (
+                  <span className="flex items-center gap-1">
+                    Cart
+                    <span
+                      className={`
+                        px-1.5 py-0.5 rounded-full text-xs font-semibold
+                        bg-green-600 text-white
+                      `}
+                    >
+                      {cart.length}
+                    </span>
+                  </span>
+                ) : (
+                  page.name
+                )}
             </NavLink>
           ))}
         </nav>
