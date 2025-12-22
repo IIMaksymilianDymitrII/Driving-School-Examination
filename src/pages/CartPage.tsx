@@ -1,5 +1,5 @@
-import { useTheme } from "../context/ThemeContext";
-import { useBooking } from "../context/BookingContext";
+import { useTheme } from "../Context/ThemeContext";
+import { useBooking } from "../Context/BookingContext";
 import ShoppingCart from "../components/Cart/ShoppingCart";
 
 const CartPage = () => {

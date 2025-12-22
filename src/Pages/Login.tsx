@@ -1,4 +1,4 @@
-import Wheel from "../assets/racing.png"; 
+import Wheel from "../assets/racing.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
@@ -12,7 +12,7 @@ const LogIn = () => {
   const [email, setEmail] = useState(``);
   const [password, setPassword] = useState(``);
   const nav = useNavigate();
-  const {themeColors} = useTheme()
+  const { theme, themeColors } = useTheme();
 
   const login = async () => {
     try {
@@ -30,11 +30,8 @@ const LogIn = () => {
         const res = await axios.get(`https://www.googleapis.com/oauth2/v3/userinfo`, {
           headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
         });
-
         const { email, name } = res.data;
-
         const backendRes = await axios.post(`http://localhost:5000/google-login`, { email, name });
-
         localStorage.setItem(`token`, backendRes.data.token);
         nav(`/dashboard`);
       } catch (err) {
@@ -44,60 +41,59 @@ const LogIn = () => {
     onError: () => console.log(`Login Failed`),
   });
 
+  const logoClass = `size-20 ${theme === 'Dark' ? 'invert' : ''}`;
+  const googleLogoClass = `size-8 ${theme === 'Dark' ? 'brightness-1000 grayscale' : 'brightness-0 '}`;
+
   return (
-    <div className={`flex justify-center items-center w-screen h-[870px] ${themeColors.bg}`}>
-      <div className={`${themeColors.border} border ${themeColors.bgWidget}  rounded-2xl p-3 text-white font-semibold`}>
+    <div className={`flex justify-center items-center w-screen h-[870px] ${themeColors.bg} ${themeColors.text}`}>
+      <div className={`${themeColors.bgWidget} ${themeColors.border} border rounded-2xl p-3 font-semibold`}>
         <div className={`text-center p-8 text-2xl flex flex-col items-center justify-center gap-3`}>
-          <img src={Wheel} alt={`Logo`} className={`size-20 invert`} />
-          <h1>Log in to your account</h1>
+          <img src={Wheel} alt={`Logo`} className={logoClass} />
+          <h1 className={`${themeColors.text}`}>Log in to your account</h1>
         </div>
         <div className={`flex flex-col gap-3 px-2`}>
           <div className={`flex flex-col gap-3`}>
             <div className={`flex flex-col gap-1`}>
-              <h2>Email Address</h2>
+              <h2 className={`${themeColors.text}`}>Email Address</h2>
               <input
                 onChange={(e) => setEmail(e.target.value)}
                 type={`text`}
-                className={`w-full pl-2 bg-slate-800 border border-slate-500 border-solid rounded-lg`}
+                className={`w-full pl-2 ${themeColors.elevated} ${themeColors.border} border rounded-lg ${themeColors.text}`}
               />
             </div>
             <div className={`flex flex-col gap-1`}>
               <div className={`flex justify-between`}>
-                <h2>Password</h2>
-                <p className={`text-blue-500 hover:text-blue-400`}>
+                <h2 className={`${themeColors.text}`}>Password</h2>
+                <p className={`${themeColors.accent} hover:${themeColors.textMuted}`}>
                   <Link to={`/forgotpassword`}>Forgot Password?</Link>
                 </p>
               </div>
               <input
                 onChange={(e) => setPassword(e.target.value)}
                 type={`password`}
-                className={`w-full pl-2 bg-slate-800 border border-slate-500 border-solid rounded-lg`}
+                className={`w-full pl-2 ${themeColors.elevated} ${themeColors.border} border rounded-lg ${themeColors.text}`}
               />
             </div>
           </div>
           <button
             onClick={login}
-            className={`w-full bg-indigo-700 rounded-lg cursor-pointer p-2 hover:bg-indigo-600`}
+            className={`w-full bg-indigo-700 rounded-lg cursor-pointer p-2 hover:bg-indigo-600 text-white`}
           >
-            Log in
+            Log In
           </button>
-          <hr className={`border-white rounded-xl`} />
+          <hr className={`${themeColors.border} rounded-xl`} />
           <div className={`flex justify-center items-center w-full`}>
             <button
               onClick={() => googleAuth()}
-              className={`bg-slate-800 rounded-lg p-2 hover:bg-slate-700 flex justify-center items-center w-full`}
+              className={`${themeColors.elevated} rounded-lg p-2 hover:${themeColors.bgHover} flex justify-center items-center w-full`}
             >
-              <img
-                src={googleLogo}
-                alt={`google-logo`}
-                className={`size-8 brightness-1000 grayscale`}
-              />
+              <img src={googleLogo} alt={`google-logo`} className={googleLogoClass} />
             </button>
           </div>
         </div>
         <div className={`p-3 text-center flex justify-around`}>
-          <p>Not a member?</p>
-          <p className={`text-blue-500 hover:text-blue-400`}>
+          <p className={`${themeColors.text}`}>Not a member?</p>
+          <p className={`${themeColors.accent} hover:${themeColors.textMuted}`}>
             <Link to={`/signin`}>Become our Member!</Link>
           </p>
         </div>

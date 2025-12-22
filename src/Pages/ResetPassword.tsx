@@ -5,65 +5,70 @@ import axios from "axios";
 import { useTheme } from "../Context/ThemeContext";
 
 const ResetPassword = () => {
-  const [message, setMessage] = useState(``);
-  const [password, setPassword] = useState(``);
+  const { theme, themeColors } = useTheme();
+
+  const [message, setMessage] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const nav = useNavigate();
   const [searchParams] = useSearchParams();
-  const token = searchParams.get(`token`);
-  const { themeColors } = useTheme();
+  const token = searchParams.get("token");
 
   const submitNewPassword = async () => {
     if (!password) {
-      setMessage(`Password cannot be empty`);
+      setMessage("Password cannot be empty");
       return;
     }
 
     try {
-      await axios.post(`http://localhost:5000/reset-password`, {
+      await axios.post("http://localhost:5000/reset-password", {
         token,
         newPassword: password,
       });
-      setMessage(`Password updated successfully!`);
-      setTimeout(() => nav(`/`), 2000);
+      setMessage("Password updated successfully!");
+      setTimeout(() => nav("/"), 2000);
     } catch (err: any) {
       console.error(err);
-      setMessage(err?.response?.data?.error || `Something went wrong`);
+      setMessage(err?.response?.data?.error || "Something went wrong");
     }
   };
 
   return (
     <main
-      className={`flex justify-center items-center w-screen min-h-screen ${themeColors.bg} p-4`}
+      className={`flex justify-center items-center w-screen h-[870px] ${themeColors.bg}`}
     >
       <section
-        className={`border rounded-2xl p-6 text-white font-semibold w-full max-w-sm flex flex-col gap-6 ${themeColors.border} ${themeColors.bgWidget} border ${themeColors.border}`}
+        className={`${themeColors.bgWidget} ${themeColors.border} border rounded-2xl p-3 font-semibold ${themeColors.text}`}
       >
-        <div className={`text-center flex flex-col items-center gap-3`}>
-          <img src={Wheel} alt={`Logo`} className={`w-20 invert`} />
-          <h1 className={`text-2xl font-bold`}>Setup New Password</h1>
+        <div className="text-center p-8 text-2xl flex flex-col items-center justify-center gap-3">
+          <img
+            src={Wheel}
+            alt="Logo"
+            className={`size-20 ${theme === "Dark" ? "invert" : ""}`}
+          />
+          <h1>Setup New Password</h1>
         </div>
 
-        <div className={`flex flex-col gap-4`}>
-          <label className={`font-semibold`}>New Password</label>
-          <input
-            type={`password`}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={`w-full px-3 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-indigo-500 ${themeColors.elevated} ${themeColors.border}`}
-            placeholder={`Enter your new password`}
-          />
+        <div className="flex flex-col gap-3 px-2">
+          <div className="flex flex-col gap-1">
+            <h2>New Password</h2>
+            <input
+              value={password}
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              className={`w-full pl-2 ${themeColors.elevated} ${themeColors.border} border rounded-lg ${themeColors.text}`}
+            />
+          </div>
+
           <button
             onClick={submitNewPassword}
-            className={`w-full bg-indigo-700 hover:bg-indigo-600 text-white rounded-lg py-2 font-semibold transition-colors`}
+            className="w-full my-2 bg-indigo-700 rounded-lg cursor-pointer p-2 hover:bg-indigo-600 text-white"
           >
             Create New Password
           </button>
 
           {message && (
-            <p className={`text-center mt-2 text-red-500 font-medium`}>
-              {message}
-            </p>
+            <p className="text-center text-red-500">{message}</p>
           )}
         </div>
       </section>

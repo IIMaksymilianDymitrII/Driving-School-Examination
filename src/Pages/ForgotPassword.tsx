@@ -1,11 +1,9 @@
 import Wheel from "../assets/racing.png";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useTheme } from "../Context/ThemeContext";
 
 const ForgotPassword = () => {
-  const nav = useNavigate();
   const { themeColors } = useTheme();
 
   const [email, setEmail] = useState(``);
