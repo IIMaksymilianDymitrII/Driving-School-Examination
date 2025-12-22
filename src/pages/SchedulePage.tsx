@@ -26,10 +26,6 @@ const SchedulePage: React.FC = () => {
   return (
     <main className={`min-h-screen ${themeColors.bg} p-4`}>
       <div className="max-w-5xl mx-auto space-y-6">
-        <ScheduleSearch
-          value={searchQuery}
-          onChange={setSearchQuery}
-        />
 
         <ScheduleCalendar
           currentDate={currentDate}
@@ -37,6 +33,11 @@ const SchedulePage: React.FC = () => {
           events={scheduleEvents}
           setSelectedEvent={setSelectedEvent}
           setSelectedDate={setSelectedDate}
+        />
+
+        <ScheduleSearch
+          value={searchQuery}
+          onChange={setSearchQuery}
         />
 
         <ScheduleEventSection

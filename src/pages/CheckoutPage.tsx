@@ -3,8 +3,6 @@ import { useTheme } from "../context/ThemeContext";
 import GoogleLogo from "../assets/Google__G__logo.svg.png";
 import AppleLogo from "../assets/AppleLogo.png";
 import { useBooking } from "../context/BookingContext";
-import Lesson from "../components/Cart/Lesson";
-import { id } from "date-fns/locale";
 
 const isValidCardNumber = (number: string) => /^[0-9]{16}$/.test(number);
 const isValidCVV = (cvv: string) => /^[0-9]{3}$/.test(cvv);
