@@ -50,7 +50,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex justify-center items-center w-screen h-screen bg-slate-950">
+    <div className="flex justify-center items-center w-screen h-[870px] bg-slate-950">
       <div className="bg-slate-900 rounded-2xl p-3 text-white font-semibold w-[360px]">
         <div className="text-center p-8 text-2xl flex flex-col items-center justify-center gap-3">
           <img src={Wheel} alt="Logo" className="h-20 w-20 invert" />
@@ -99,6 +99,13 @@ const SignIn = () => {
               >
               Create Account
             </button>
+
+<div className="flex px-2 py-1 justify-around">
+            <p>Already a Member?</p>
+            <button className="px-3 text-blue-500 hover:text-blue-400 cursor-pointer"
+            onClick={() => nav("/login")}>Login Now</button>
+
+</div>
         </div>
       </div>
     </div>

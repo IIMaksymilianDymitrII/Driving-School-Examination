@@ -5,17 +5,23 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider } from "./Context/UserInfoContext.tsx";
+import { BookingProvider } from "./Context/BookingContext.tsx";
+import { ThemeProvider } from "./Context/ThemeContext.tsx";
 
-const client = import.meta.env.VITE_GOOGLE_CLIENT_ID
+const client = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider>
-    <GoogleOAuthProvider clientId={client} >
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </GoogleOAuthProvider>
-   </AuthProvider>
+      <GoogleOAuthProvider clientId={client}>
+        <BrowserRouter>
+          <ThemeProvider>
+            <BookingProvider>
+              <App />
+            </BookingProvider>
+          </ThemeProvider>
+        </BrowserRouter>
+      </GoogleOAuthProvider>
+    </AuthProvider>
   </StrictMode>
 );

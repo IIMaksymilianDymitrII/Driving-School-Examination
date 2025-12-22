@@ -24,7 +24,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <main className="flex justify-center items-center w-screen h-screen bg-slate-950">
+    <main className="flex justify-center items-center w-screen h-[870px] bg-slate-950">
       <section className="bg-slate-900 rounded-2xl p-3 text-white font-semibold w-[320px]">
         <div className="text-center p-8 text-2xl flex flex-col items-center justify-center gap-3">
           <img src={Wheel} alt="Logo" className="size-20 invert" />
