@@ -1,8 +1,9 @@
-import React from "react";
+import { useMemo } from "react";
 import { format } from "date-fns";
 import CalendarEvent from "./CalendarEvent";
 import type { Event } from "../../types/Event";
 import { useTheme } from "../../context/ThemeContext";
+import { useBooking } from "../../context/BookingContext";
 
 interface CalendarDayProps {
   day: Date;
@@ -20,6 +21,12 @@ const CalendarDay: React.FC<CalendarDayProps> = ({
   onDateClick, // added prop
 }) => {
   const { themeColors } = useTheme();
+  const {purchasedLessons} = useBooking()
+
+  const visibleEvents = useMemo(() => {
+    return events.filter((ev) => !purchasedLessons.includes(String(ev.id)));
+  }, [events, purchasedLessons]);
+
   return (
     <div 
       // onClick={() => {
@@ -44,7 +51,7 @@ const CalendarDay: React.FC<CalendarDayProps> = ({
 
 
       <div className="mt-1 space-y-1 overflow-hidden">
-        {events.map((ev) => (
+        {visibleEvents.map((ev) => (
           <CalendarEvent 
             key={ev.id} 
             event={ev} 

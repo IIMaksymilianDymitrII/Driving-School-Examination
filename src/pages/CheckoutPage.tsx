@@ -35,7 +35,7 @@ const CheckoutPage = () => {
     validUntil: "",
   });
 
-  const { clearCart } = useBooking();
+  const { completePurchase} = useBooking();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -181,7 +181,7 @@ const CheckoutPage = () => {
           }
 
           if (hasError) return;
-          clearCart()
+          completePurchase() 
           setStep(2);
         }}
       >

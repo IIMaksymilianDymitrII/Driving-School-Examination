@@ -1,7 +1,7 @@
-import React from "react";
+import { useMemo } from "react";
 import type { Event } from "../../types/Event";
 import { useTheme } from "../../context/ThemeContext";
-
+import { useBooking } from "../../context/BookingContext";
 
 interface EventListProps {
   events: Event[];
@@ -18,6 +18,12 @@ const EventList: React.FC<EventListProps> = ({
 }) => {
   const { themeColors } = useTheme();
 
+  const { purchasedLessons } = useBooking();
+
+  const visibleEvents = useMemo(() => {
+    return events.filter((ev) => !purchasedLessons.includes(String(ev.id)));
+  }, [events, purchasedLessons]);
+
   return (
     <div
       className={`mt-6 ${themeColors.surface} border ${themeColors.border} rounded-xl p-4`}
@@ -27,7 +33,7 @@ const EventList: React.FC<EventListProps> = ({
       </h2>
 
       <div className={`divide-y ${themeColors.border}`}>
-        {events.map((ev) => (
+        {visibleEvents.map((ev) => (
           // <div
           //   key={ev.id}
           //   className="p-3 hover:bg-blue-50 dark:hover:bg-gray-700 rounded"
@@ -39,7 +45,6 @@ const EventList: React.FC<EventListProps> = ({
               hover:${themeColors.elevated}
             `}
           >
-
             {/* <div
               className="cursor-pointer"
               onClick={() => onEventClick(ev)}
@@ -51,18 +56,17 @@ const EventList: React.FC<EventListProps> = ({
               `}
               onClick={() => onEventClick(ev)}
             >
-
               {/* <p className="font-semibold">{ev.title}</p>
               <p className="text-sm"> */}
               {/* <p className={`font-semibold ${themeColors.text}`}>{ev.title}</p> */}
               <p
-                  className={`
+                className={`
                     font-semibold
                     ${themeColors.text}
                     group-hover:${themeColors.text}
                   `}
-                >
-                  {ev.title}
+              >
+                {ev.title}
               </p>
 
               {/* <p className={`text-sm ${themeColors.textMuted}`}>
