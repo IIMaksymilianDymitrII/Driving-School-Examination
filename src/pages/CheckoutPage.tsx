@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import GoogleLogo from "../assets/Google__G__logo.svg.png";
 import AppleLogo from "../assets/AppleLogo.png";
+import { useBooking } from "../context/BookingContext";
+import Lesson from "../components/Cart/Lesson";
+import { id } from "date-fns/locale";
 
 const isValidCardNumber = (number: string) => /^[0-9]{16}$/.test(number);
 const isValidCVV = (cvv: string) => /^[0-9]{3}$/.test(cvv);
@@ -34,16 +37,22 @@ const CheckoutPage = () => {
     validUntil: "",
   });
 
+  const { clearCart } = useBooking();
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    if (name === "email" && value.includes("@") && value.includes(".")) setEmailError(false);
-    if ((name === "firstName" || name === "lastName") && value.trim()) setError(false);
+    if (name === "email" && value.includes("@") && value.includes("."))
+      setEmailError(false);
+    if ((name === "firstName" || name === "lastName") && value.trim())
+      setError(false);
 
-    if (name === "cardNumber" && isValidCardNumber(value)) setCardNumberError(false);
+    if (name === "cardNumber" && isValidCardNumber(value))
+      setCardNumberError(false);
     if (name === "cvv" && isValidCVV(value)) setCvvError(false);
-    if (name === "validUntil" && isValidValidUntil(value)) setValidUntilError(false);
+    if (name === "validUntil" && isValidValidUntil(value))
+      setValidUntilError(false);
   };
 
   const steps = [
@@ -119,7 +128,9 @@ const CheckoutPage = () => {
         value={formData.cardNumber}
         onChange={handleChange}
       />
-      {cardNumberError && <p className="text-red-700 font-bold">Card Number must be 16 digits</p>}
+      {cardNumberError && (
+        <p className="text-red-700 font-bold">Card Number must be 16 digits</p>
+      )}
 
       <div className="flex gap-2 mt-2">
         <div>
@@ -132,7 +143,9 @@ const CheckoutPage = () => {
             value={formData.cvv}
             onChange={handleChange}
           />
-          {cvvError && <p className="text-red-700 font-bold">CVV must be 3 digits</p>}
+          {cvvError && (
+            <p className="text-red-700 font-bold">CVV must be 3 digits</p>
+          )}
         </div>
         <div>
           <p className="font-semibold">Valid Until</p>
@@ -144,7 +157,9 @@ const CheckoutPage = () => {
             onChange={handleChange}
           />
           {validUntilError && (
-            <p className="text-red-700 font-bold">Card expiration date is invalid or expired</p>
+            <p className="text-red-700 font-bold">
+              Card expiration date is invalid or expired
+            </p>
           )}
         </div>
       </div>
@@ -168,6 +183,7 @@ const CheckoutPage = () => {
           }
 
           if (hasError) return;
+          clearCart()
           setStep(2);
         }}
       >
