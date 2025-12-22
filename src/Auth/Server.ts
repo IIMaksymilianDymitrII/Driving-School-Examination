@@ -94,9 +94,8 @@ app.get("/dashboard", async (req: Request, res: Response) => {
 app.post("/google-login", async (req: Request, res: Response) => {
   const { email, name } = req.body;
 
-  if (!email || !name) {
+  if (!email || !name) 
     return res.status(400).json({ error: "Email and name required" });
-  }
 
   try {
     const user = await db.get("SELECT * FROM users WHERE email = ?", [email]);
@@ -116,7 +115,7 @@ app.post("/google-login", async (req: Request, res: Response) => {
   }
 });
 
-app.get("/users", async (req: Request, res: Response) => {
+app.get("/users", async (res: Response) => {
   try {
     const users = await db.all("SELECT * FROM users");
     res.json(users);
