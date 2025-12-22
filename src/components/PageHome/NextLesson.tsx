@@ -39,4 +39,4 @@ const NextLesson = ({ todayNextLesson }: { todayNextLesson: Lesson | null }) => 
   )
 }
 
-export default NextLesson
+export default NextLesson;

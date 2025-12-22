@@ -6,5 +6,6 @@ export interface Event {
   instructor: string;
   location?: string;
   price: number;
+  duration: number; // duration in minutes
   notes?: string;
 }

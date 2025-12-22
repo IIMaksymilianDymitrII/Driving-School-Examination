@@ -14,6 +14,8 @@ const CountPrice = () => {
 
   const tax = subtotal * 0.25;
   const totalPrice = subtotal + tax;
+  const { clearCart } = useBooking();
+
 
   return (
     <section
@@ -38,12 +40,25 @@ const CountPrice = () => {
       <h3>{totalPrice} kr</h3>
       </div>
       <button
-      onClick={() => nav("/checkout")}
+        onClick={() => nav("/checkout")}
         className="px-3 py-1 text-md font-semibold rounded
            bg-green-600 text-white hover:bg-green-700
             focus:ring-2 focus:ring-green-400 mt-2"
       >
         Checkout
+      </button>
+
+      {/* // Empty cart button */}
+      <button
+        onClick={clearCart}
+        className="
+          mt-2 px-3 py-1 text-sm font-semibold rounded
+          border border-red-500 text-red-500
+          hover:bg-red-500 hover:text-white
+          focus:ring-2 focus:ring-red-400
+        "
+      >
+        Empty Cart
       </button>
     </section>
   );

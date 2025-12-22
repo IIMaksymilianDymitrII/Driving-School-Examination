@@ -1,13 +1,12 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
 
-export type LessonDuration = "1h" | "2h";
 
 export interface Lesson {
   id: string;
   title: string
   date: string;       // ISO date string (e.g. 2025-12-06)
   time: string;       // e.g. "10:00"
-  duration: LessonDuration;
+  duration: number;
   instructor: string;
   studentName?: string; // filled once booked
   price: number
@@ -33,7 +32,7 @@ const seedLessons: Lesson[] = [
     title:"",
     date: "2025-12-06",
     time: "10:00",
-    duration: "2h",
+    duration: 120,
     instructor: "Anna Svensson",
     price:0,
     location:"",
@@ -43,7 +42,7 @@ const seedLessons: Lesson[] = [
     title:"",
     date: "2025-12-06",
     time: "14:00",
-    duration: "1h",
+    duration: 60,
     instructor: "Jonas Karlsson",
     price:0,
     location:"",
@@ -53,7 +52,7 @@ const seedLessons: Lesson[] = [
     title:"",
     date: "2025-12-07",
     time: "09:00",
-    duration: "2h",
+    duration: 120,
     instructor: "Anna Svensson",
     price:0,
     location:""
@@ -63,7 +62,7 @@ const seedLessons: Lesson[] = [
     title:"",
     date: "2025-12-08",
     time: "16:00",
-    duration: "1h",
+    duration: 60,
     instructor: "Sara Lind",
     price:0,
     location:""
