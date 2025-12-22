@@ -76,7 +76,14 @@ app.post("/login", async (req: Request, res: Response) => {
     expiresIn: "1h",
   });
 
-  res.json({ token });
+ res.json({
+  token,
+  user: {
+    email: user.email,
+    name: user.name,
+  },
+});
+
 });
 
 app.get("/dashboard", async (req: Request, res: Response) => {
@@ -90,39 +97,35 @@ app.get("/dashboard", async (req: Request, res: Response) => {
     res.json({ message: "Access granted", user: decoded });
   });
 });
-
-app.post("/google-login", async (req: Request, res: Response) => {
+app.post("/google-login", async (req, res) => {
   const { email, name } = req.body;
 
-  if (!email || !name) 
+  if (!email || !name)
     return res.status(400).json({ error: "Email and name required" });
 
-  try {
-    const user = await db.get("SELECT * FROM users WHERE email = ?", [email]);
+  let user = await db.get("SELECT * FROM users WHERE email = ?", [email]);
 
-    if (!user) {
-      await db.run(
-        "INSERT INTO users (email, password, name) VALUES (?, ?, ?)",
-        [email, "", name]
-      );
-    }
-    const token = jwt.sign({ email, name }, SECRET, { expiresIn: "1h" });
+  if (!user) {
+    await db.run("INSERT INTO users (email, password, name) VALUES (?, ?, ?)", [
+      email,
+      "",
+      name,
+    ]);
 
-    res.json({ token, message: "Logged in via Google" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Google login failed" });
+    user = { email, name };
   }
-});
 
-app.get("/users", async (res: Response) => {
-  try {
-    const users = await db.all("SELECT * FROM users");
-    res.json(users);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Could not fetch users" });
-  }
+  const token = jwt.sign({ email: user.email, name: user.name }, SECRET, {
+    expiresIn: "1h",
+  });
+
+  res.json({
+    token,
+    user: {
+      email: user.email,
+      name: user.name,
+    },
+  });
 });
 
 app.post("/forgotpassword", async (req: Request, res: Response) => {

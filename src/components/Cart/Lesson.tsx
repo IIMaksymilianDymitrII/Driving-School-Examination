@@ -7,8 +7,8 @@ interface LessonProps {
   time: string;
   instructor: string;
   location?: string;
-  price: number
-  remove: (id: string) => void ;
+  price: number;
+  remove: (id: string) => void;
 }
 
 const Lesson = ({
@@ -24,11 +24,8 @@ const Lesson = ({
   const { themeColors } = useTheme();
   return (
     <li
-      className={`flex justify-between 
-             ${themeColors.bgWidget} shadow-lg border ${themeColors.border} 
-        rounded-lg  flex -col justify-center 
-            p-5
-            `}
+      className={`flex justify-between w-full ${themeColors.bgWidget} shadow-lg border ${themeColors.border} 
+        rounded-lg p-5 `}
     >
       <div>
         <h2 className="text-xl font-semibold pb-2 ">{title}</h2>

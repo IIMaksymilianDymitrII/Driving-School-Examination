@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "../Context/ThemeContext";
 import GoogleLogo from "../assets/Google__G__logo.svg.png";
 import AppleLogo from "../assets/AppleLogo.png";
@@ -17,8 +17,11 @@ const isValidValidUntil = (date: string) => {
 };
 
 const CheckoutPage = () => {
+  const storedUser = localStorage.getItem("user");
+  const loggedInUser = storedUser ? JSON.parse(storedUser) : null;
+
   const { themeColors } = useTheme();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(loggedInUser ? 1 : 0);
   const [emailError, setEmailError] = useState(false);
   const [error, setError] = useState(false);
 
@@ -52,6 +55,17 @@ const CheckoutPage = () => {
     if (name === "validUntil" && isValidValidUntil(value))
       setValidUntilError(false);
   };
+  // skips first form
+  useEffect(() => {
+    if (loggedInUser) {
+      setFormData((prev) => ({
+        ...prev,
+        email: loggedInUser.email,
+        firstName: loggedInUser.name,
+      }));
+      setStep(1);
+    }
+  }, []);
 
   const steps = [
     <section

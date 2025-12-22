@@ -9,7 +9,8 @@ interface WeatherData {
 const WeatherForcast = () => {
   const { themeColors } = useTheme();
   const [weather, setWeather] = useState<WeatherData | null>(null);
-  const [weatherMessage, setWeatherMessage] = useState<string>("Loading weather...");
+  const [weatherMessage, setWeatherMessage] =
+    useState<string>("Loading weather...");
 
   useEffect(() => {
     // Stockholm coordinates
@@ -29,45 +30,49 @@ const WeatherForcast = () => {
         // very simple tips based on temp & wind
         let msg = `Current temp: ${parsed.temperature}°C, wind ${parsed.windspeed} m/s. `;
         if (parsed.temperature <= 0) {
-          msg += "Roads may be icy – increase following distance and brake gently.";
+          msg +=
+            "Roads may be icy – increase following distance and brake gently.";
         } else if (parsed.windspeed > 10) {
           msg += "It is quite windy – keep both hands on the steering wheel.";
         } else {
-          msg += "Nice conditions for practice – focus on smooth steering and scanning traffic.";
+          msg +=
+            "Nice conditions for practice – focus on smooth steering and scanning traffic.";
         }
         setWeatherMessage(msg);
       })
-      .catch(() => setWeatherMessage("Could not load weather. Drive carefully and adjust speed."));
+      .catch(() =>
+        setWeatherMessage(
+          "Could not load weather. Drive carefully and adjust speed."
+        )
+      );
   }, []);
   return (
     <div>
-          <div className={` ${themeColors.bgWidget} shadow-lg rounded-lg p-6 flex flex-col justify-between text-sm ${themeColors.border} border ${themeColors.text}`}>
-            <h2 className={`text-xl font-semibold mb-2 ${themeColors.text}`}>Weather & Driving Tip</h2>
-            <div className="text-5xl font-bold text-blue-700">
-                {weather?.temperature}°C
-            </div>
+      <div
+        className={` ${themeColors.bgWidget} shadow-lg rounded-lg p-6 flex flex-col justify-between text-sm ${themeColors.border} border ${themeColors.text}`}
+      >
+        <h2 className={`text-xl font-semibold mb-2 ${themeColors.text}`}>
+          Weather & Driving Tip
+        </h2>
+        <div className="text-5xl font-bold text-blue-700">
+          {weather?.temperature}°C
+        </div>
 
-            <div className="text-lg text-gray-600 dark:text-gray-300">
-                Wind: {weather?.windspeed} m/s  
-                <br />
-                <div className="text-lg text-red-600 dark:text-gray-300"> 
-                  <p>
-                      Tips: {weatherMessage}
-                  </p>
-                  </div>
-                
-
-            </div>
-
-            
-            <br />
-            <p className={`text-xs ${themeColors.text}`}>
-              Weather data: Stockholm, live from Open-Meteo. Always adapt speed and distance
-              to road conditions.
-            </p>
+        <div className="text-lg text-gray-600 Dark:text-gray-300">
+          Wind: {weather?.windspeed} m/s
+          <br />
+          <div className="text-lg text-red-600 Dark:text-gray-300">
+            <p>Tips: {weatherMessage}</p>
           </div>
+        </div>
+        <br />
+        <p className={`text-xs ${themeColors.text}`}>
+          Weather data: Stockholm, live from Open-Meteo. Always adapt speed and
+          distance to road conditions.
+        </p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default WeatherForcast
+export default WeatherForcast;

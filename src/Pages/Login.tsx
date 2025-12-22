@@ -42,7 +42,7 @@ const LogIn = () => {
   });
 
   const logoClass = `size-20 ${theme === 'Dark' ? 'invert' : ''}`;
-  const googleLogoClass = `size-8 ${theme === 'Dark' ? 'brightness-1000 grayscale' : 'brightness-0 '}`;
+  const googleLogoClass = `size-8 ${theme === 'Dark' ? 'brightness-1000 grayscale ' : 'brightness-0 '}`;
 
   return (
     <div className={`flex justify-center items-center w-screen h-[870px] ${themeColors.bg} ${themeColors.text}`}>
@@ -85,7 +85,7 @@ const LogIn = () => {
           <div className={`flex justify-center items-center w-full`}>
             <button
               onClick={() => googleAuth()}
-              className={`${themeColors.elevated} rounded-lg p-2 hover:${themeColors.bgHover} flex justify-center items-center w-full`}
+              className={`${themeColors.elevated} rounded-lg p-2 hover:${themeColors.bgHover} cursor-pointer flex justify-center items-center w-full`}
             >
               <img src={googleLogo} alt={`google-logo`} className={googleLogoClass} />
             </button>
