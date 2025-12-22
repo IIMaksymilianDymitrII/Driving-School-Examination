@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../Context/ThemeContext";
 import GoogleLogo from "../assets/Google__G__logo.svg.png";
 import AppleLogo from "../assets/AppleLogo.png";
-import { useBooking } from "../context/BookingContext";
+import { useBooking } from "../Context/BookingContext";
 
 const isValidCardNumber = (number: string) => /^[0-9]{16}$/.test(number);
 const isValidCVV = (cvv: string) => /^[0-9]{3}$/.test(cvv);
@@ -35,7 +35,7 @@ const CheckoutPage = () => {
     validUntil: "",
   });
 
-  const { completePurchase} = useBooking();
+  const { completePurchase } = useBooking();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -181,7 +181,7 @@ const CheckoutPage = () => {
           }
 
           if (hasError) return;
-          completePurchase() 
+          completePurchase();
           setStep(2);
         }}
       >
