@@ -1,26 +1,26 @@
-import { useTheme } from "../../Context/ThemeContext";
-import { useBooking } from "../../Context/BookingContext";
+import { useTheme } from "../../context/ThemeContext";
+import { useBooking } from "../../context/BookingContext";
 import { useNavigate } from "react-router-dom";
 
 const CountPrice = () => {
   const { cart } = useBooking();
   const { themeColors } = useTheme();
-  
   const nav = useNavigate()
 
-  const totalPrice = cart.reduce((sum, lesson) => {
+  const subtotal = cart.reduce((sum, lesson) => {
     const price = lesson.price;
     return sum + price;
   }, 0);
 
-  const tax = totalPrice * 0.25;
-  const subtotal = totalPrice - tax;
+  const tax = subtotal * 0.25;
+  const totalPrice = subtotal + tax;
   const { clearCart } = useBooking();
+
 
   return (
     <section
       className={`${themeColors.bgWidget} col-span-1 h-full max-h-[160px] self-center shadow-lg 
-        rounded-lg p-6 flex flex-col justify-center py-24
+        rounded-lg p-6 flex flex-col justify-center 
         border ${themeColors.border}
          ${themeColors.text} `}
     >

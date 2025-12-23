@@ -1,5 +1,5 @@
 
-import { useTheme } from "../../Context/ThemeContext";
+import { useTheme } from "../../context/ThemeContext";
 
 const DrivingQuote = () => {
   const { themeColors } = useTheme();
@@ -24,4 +24,4 @@ const DrivingQuote = () => {
   )
 }
 
-export default DrivingQuote;
+export default DrivingQuote

@@ -1,27 +1,20 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
 import "./index.css";
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App.tsx";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { AuthProvider } from "./Context/UserInfoContext.tsx";
-import { BookingProvider } from "./Context/BookingContext.tsx";
-import { ThemeProvider } from "./Context/ThemeContext.tsx";
+import App from "./App";
 
-const client = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+import { BookingProvider } from "./context/BookingContext";
+import { ThemeProvider } from "./context/ThemeContext";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <AuthProvider>
-      <GoogleOAuthProvider clientId={client}>
-        <BrowserRouter>
-          <ThemeProvider>
-            <BookingProvider>
-              <App />
-            </BookingProvider>
-          </ThemeProvider>
-        </BrowserRouter>
-      </GoogleOAuthProvider>
-    </AuthProvider>
-  </StrictMode>
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <ThemeProvider>
+        <BookingProvider>
+          <App />
+        </BookingProvider>
+      </ThemeProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );

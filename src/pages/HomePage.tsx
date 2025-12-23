@@ -1,5 +1,5 @@
-import { useBooking } from "../Context/BookingContext";
-import { useTheme } from "../Context/ThemeContext";
+import { useBooking } from "../context/BookingContext";
+import { useTheme } from "../context/ThemeContext";
 import WeatherForcast from "../components/PageHome/WeatherForcast";
 import DrivingQuote from "../components/PageHome/DrivingQuote";
 import UpdatesNRoles from "../components/PageHome/UpdatesNRoles";

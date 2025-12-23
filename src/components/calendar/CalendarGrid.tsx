@@ -1,4 +1,7 @@
-import { useTheme } from "../../Context/ThemeContext";
+import React from "react";
+import { useTheme } from "../../context/ThemeContext";
+
+
 import {
   startOfMonth,
   endOfMonth,

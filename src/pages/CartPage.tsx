@@ -1,5 +1,5 @@
-import { useTheme } from "../Context/ThemeContext";
-import { useBooking } from "../Context/BookingContext";
+import { useTheme } from "../context/ThemeContext";
+import { useBooking } from "../context/BookingContext";
 import ShoppingCart from "../components/Cart/ShoppingCart";
 
 const CartPage = () => {
@@ -7,7 +7,7 @@ const CartPage = () => {
   const { themeColors } = useTheme();
 
   return (
-    <main className={`max-h-screen ${themeColors.text} `}>
+    <main className={`min-h-screen ${themeColors.text} `}>
       <section className="">
         <div className={`p-3 flex justify-center items-center `}>
           <h1 className="text-3xl font-semibold p-10">Your Shopping Cart</h1>

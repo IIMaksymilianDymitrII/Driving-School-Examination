@@ -1,9 +1,8 @@
 import React from "react";
-import { format } from "date-fns";
+import { format, isBefore, startOfDay } from "date-fns";
 import CalendarEvent from "./CalendarEvent";
 import type { Event } from "../../types/Event";
-import { useTheme } from "../../Context/ThemeContext";
-import { useBooking } from "../../Context/BookingContext";
+import { useTheme } from "../../context/ThemeContext";
 
 interface CalendarDayProps {
   day: Date;
@@ -21,6 +20,12 @@ const CalendarDay: React.FC<CalendarDayProps> = ({
   onDateClick, // added prop
 }) => {
   const { themeColors } = useTheme();
+
+  const today = startOfDay(new Date());
+  const dayDate = startOfDay(new Date(day));
+
+  const isPast = isBefore(dayDate, today);
+
   return (
   //   <div 
   //     // onClick={() => {
@@ -78,10 +83,9 @@ const CalendarDay: React.FC<CalendarDayProps> = ({
       {/* Events */}
       <div className="mt-1 space-y-1 overflow-hidden">
         {events.map((ev) => (
-          <CalendarEvent 
-            key={ev.id} 
-            event={ev} 
-            // onClick={onEventClick} 
+          <CalendarEvent
+            key={ev.id}
+            event={ev}
             onClick={(e) => {
               e.stopPropagation();
 

@@ -1,4 +1,4 @@
-import { useBooking } from "../../Context/BookingContext"
+import { useBooking } from "../../context/BookingContext"
 import Lesson from "./Lesson"
 import CountPrice from "./CountPrice"
 
@@ -11,7 +11,7 @@ const ShoppingCart = () => {
         animate-[slideIn_0.3_ease-out] `}
       >
         <section 
-          className={`md:col-span-2 max-h-[700px] overflow-y-auto [&::-webkit-scrollbar-thumb]:bg-green-300 `}>
+          className={`md:col-span-2 max-h-[700px] overflow-y-auto   [&::-webkit-scrollbar-thumb]:bg-green-300 `}>
         <ul className="grid gap-3" > 
 
 

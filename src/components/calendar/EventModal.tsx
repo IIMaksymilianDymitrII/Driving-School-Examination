@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import type { Event } from "../../types/Event";
-import { useBooking } from "../../Context/BookingContext";
+import { useBooking } from "../../context/BookingContext";
 import { mapEventToLesson } from "../../utils/mapEventToLesson";
 import { format } from "date-fns";
 
@@ -69,10 +69,6 @@ const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
           <p>
             <span className="font-semibold">Location:</span>{" "}
             {event.location || "Driving school"}
-          </p>
-          <p>
-            <span className="font-semibold">Duration:</span>{" "}
-            {event.duration/60}h 
           </p>
           <p>
             <span className="font-semibold">Price:</span>{" "}

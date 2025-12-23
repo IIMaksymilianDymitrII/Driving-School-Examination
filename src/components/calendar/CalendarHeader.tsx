@@ -1,5 +1,6 @@
+import React from "react";
 import { format, addMonths, subMonths } from "date-fns";
-import { useTheme } from "../../Context/ThemeContext";
+import { useTheme } from "../../context/ThemeContext";
 
 interface CalendarHeaderProps {
   currentDate: Date;
