@@ -1,5 +1,5 @@
-import type { Lesson } from "../../context/BookingContext"
-import { useTheme } from "../../context/ThemeContext";
+import type { Lesson } from "../../Context/BookingContext"
+import { useTheme } from "../../Context/ThemeContext";
 
 const NextLesson = ({ todayNextLesson }: { todayNextLesson: Lesson | null }) => {
   const { themeColors } = useTheme();

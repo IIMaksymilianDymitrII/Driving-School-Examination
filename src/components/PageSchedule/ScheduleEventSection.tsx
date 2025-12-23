@@ -1,7 +1,7 @@
 import EventList from "../calendar/EventList";
 import EventModal from "../calendar/EventModal";
 import type { Event } from "../../types/Event";
-import { useBooking } from "../../context/BookingContext";
+import { useBooking } from "../../Context/BookingContext";
 import { mapEventToLesson } from "../../utils/mapEventToLesson";
 
 interface Props {

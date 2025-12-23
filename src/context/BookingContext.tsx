@@ -1,17 +1,15 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
 
-export type LessonDuration = "1h" | "2h";
-
 export interface Lesson {
   id: string;
-  title: string
-  date: string;       // ISO date string (e.g. 2025-12-06)
-  time: string;       // e.g. "10:00"
-  duration: LessonDuration;
+  title: string;
+  date: string; // ISO date string (e.g. 2025-12-06)
+  time: string; // e.g. "10:00"
+  duration: number;
   instructor: string;
   studentName?: string; // filled once booked
-  price: number
-  location?:string
+  price: number;
+  location?: string;
 }
 
 interface BookingContextValue {
@@ -20,62 +18,71 @@ interface BookingContextValue {
   addToCart: (lesson: Lesson) => void;
   removeFromCart: (id: string) => void;
   clearCart: () => void;
+  completePurchase: () => void;
   todayNextLesson: Lesson | null;
   nextAvailableThisWeek: Lesson[];
+  purchasedLessons: string[];
 }
 
-const BookingContext = createContext<BookingContextValue | undefined>(undefined);
+const BookingContext = createContext<BookingContextValue | undefined>(
+  undefined
+);
 
 // simple mock seed data
 const seedLessons: Lesson[] = [
   {
     id: "L1",
-    title:"",
+    title: "",
     date: "2025-12-06",
     time: "10:00",
-    duration: "2h",
+    duration: 120,
     instructor: "Anna Svensson",
-    price:0,
-    location:"",
+    price: 0,
+    location: "",
   },
   {
     id: "L2",
-    title:"",
+    title: "",
     date: "2025-12-06",
     time: "14:00",
-    duration: "1h",
+    duration: 60,
     instructor: "Jonas Karlsson",
-    price:0,
-    location:"",
+    price: 0,
+    location: "",
   },
   {
     id: "L3",
-    title:"",
+    title: "",
     date: "2025-12-07",
     time: "09:00",
-    duration: "2h",
+    duration: 120,
     instructor: "Anna Svensson",
-    price:0,
-    location:""
+    price: 0,
+    location: "",
   },
   {
     id: "L4",
-    title:"",
+    title: "",
     date: "2025-12-08",
     time: "16:00",
-    duration: "1h",
+    duration: 60,
     instructor: "Sara Lind",
-    price:0,
-    location:""
+    price: 0,
+    location: "",
   },
 ];
 
-export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [lessons] = useState<Lesson[]>(seedLessons);
   const [cart, setCart] = useState<Lesson[]>([]);
+  const [purchasedLessons, setPurchasedLessons] = useState<string[]>([]);
 
   const addToCart = (lesson: Lesson) => {
-    setCart((prev) => (prev.find((l) => l.id === lesson.id) ? prev : [...prev, lesson]));
+    setCart((prev) =>
+      prev.find((l) => l.id === lesson.id) ? prev : [...prev, lesson]
+    );
   };
 
   const removeFromCart = (id: string) => {
@@ -92,6 +99,11 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
     // just pick first for now
     return todayLessons[0];
   }, [lessons, today]);
+
+  const completePurchase = () => {
+    setPurchasedLessons((prev) => [...prev, ...cart.map((l) => l.id)]);
+    setCart([]);
+  };
 
   const nextAvailableThisWeek = useMemo(() => {
     // very simple: all lessons in next 7 days
@@ -115,6 +127,8 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
         clearCart,
         todayNextLesson,
         nextAvailableThisWeek,
+        completePurchase,
+        purchasedLessons,
       }}
     >
       {children}

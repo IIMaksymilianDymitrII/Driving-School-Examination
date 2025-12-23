@@ -7,7 +7,7 @@ export const mapEventToLesson = (ev: Event): Lesson => {
     title: ev.title,
     date: ev.date,
     time: ev.time,
-    duration: "1h",               // default duration, or decide based on title
+    duration: ev.duration,               // default duration, or decide based on title
     instructor: ev.instructor,
     location: ev.location,
     price: ev.price,

@@ -1,5 +1,5 @@
 
-import { useTheme } from "../../context/ThemeContext";
+import { useTheme } from "../../Context/ThemeContext";
 
 const UpcommingEvent = () => {
   const { themeColors } = useTheme();
