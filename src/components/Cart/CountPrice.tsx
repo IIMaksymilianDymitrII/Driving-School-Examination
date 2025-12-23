@@ -1,5 +1,5 @@
-import { useTheme } from "../../context/ThemeContext";
-import { useBooking } from "../../context/BookingContext";
+import { useTheme } from "../../Context/ThemeContext";
+import { useBooking } from "../../Context/BookingContext";
 import { useNavigate } from "react-router-dom";
 
 const CountPrice = () => {

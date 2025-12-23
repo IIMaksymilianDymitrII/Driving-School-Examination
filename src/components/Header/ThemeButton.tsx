@@ -1,4 +1,4 @@
-import { useTheme } from "../../context/ThemeContext";
+import { useTheme } from "../../Context/ThemeContext";
 const ThemeButton = () => {
   const { theme, setTheme, themeColors } = useTheme();
   return (

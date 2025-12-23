@@ -6,7 +6,7 @@ import ScheduleSearch from "../components/PageSchedule/ScheduleSearch";
 import ScheduleCalendar from "../components/PageSchedule/ScheduleCalendar";
 import ScheduleEventSection from "../components/PageSchedule/ScheduleEventSection";
 
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../Context/ThemeContext";
 
 const SchedulePage: React.FC = () => {
   const { themeColors } = useTheme();

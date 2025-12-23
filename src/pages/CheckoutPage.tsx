@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useTheme } from "../context/ThemeContext";
+import { useState, useEffect } from "react";
+import { useTheme } from "../Context/ThemeContext";
 import GoogleLogo from "../assets/Google__G__logo.svg.png";
 import AppleLogo from "../assets/AppleLogo.png";
-import { useBooking } from "../context/BookingContext";
+import { useBooking } from "../Context/BookingContext";
 
 const isValidCardNumber = (number: string) => /^[0-9]{16}$/.test(number);
 const isValidCVV = (cvv: string) => /^[0-9]{3}$/.test(cvv);
@@ -17,8 +17,11 @@ const isValidValidUntil = (date: string) => {
 };
 
 const CheckoutPage = () => {
+  const storedUser = localStorage.getItem("user");
+  const loggedInUser = storedUser ? JSON.parse(storedUser) : null;
+
   const { themeColors } = useTheme();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(loggedInUser ? 1 : 0);
   const [emailError, setEmailError] = useState(false);
   const [error, setError] = useState(false);
 
@@ -35,7 +38,7 @@ const CheckoutPage = () => {
     validUntil: "",
   });
 
-  const { clearCart } = useBooking();
+  const { completePurchase } = useBooking();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -52,6 +55,17 @@ const CheckoutPage = () => {
     if (name === "validUntil" && isValidValidUntil(value))
       setValidUntilError(false);
   };
+  // skips first form
+  useEffect(() => {
+    if (loggedInUser) {
+      setFormData((prev) => ({
+        ...prev,
+        email: loggedInUser.email,
+        firstName: loggedInUser.name,
+      }));
+      setStep(1);
+    }
+  }, []);
 
   const steps = [
     <section
@@ -181,7 +195,7 @@ const CheckoutPage = () => {
           }
 
           if (hasError) return;
-          clearCart()
+          completePurchase();
           setStep(2);
         }}
       >

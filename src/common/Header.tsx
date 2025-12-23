@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useBooking } from "../context/BookingContext";
+import { useBooking } from "../Context/BookingContext";
 import drivingWizardLogo from "../assets/driving-wizard-logo.png";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../Context/ThemeContext";
 import ThemeButton from "../components/Header/ThemeButton";
 
 const Header: React.FC = () => {
@@ -13,7 +13,7 @@ const Header: React.FC = () => {
     { name: "Home", link: "/" },
     { name: "Schedules", link: "/schedules" },
     { name: "Cart", link: "/cart" },
-    { name: "Checkout", link: "/checkout" },
+    { name: "Login", link: "/login" },
   ];
 
   return (
@@ -24,7 +24,7 @@ const Header: React.FC = () => {
       >
         <p className="pr-3">New student?</p>
         <Link
-          to="/register/step-1"
+          to="/signin"
           className="font-semibold text-blue-700 hover:underline"
         >
           {" "}
