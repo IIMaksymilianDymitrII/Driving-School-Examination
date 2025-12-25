@@ -1,15 +1,15 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Header from "./common/Header";
-import HomePage from "./Pages/HomePage";
-import SchedulePage from "./Pages/SchedulePage";
+import HomePage from "./pages/HomePage";
+import SchedulePage from "./pages/SchedulePage";
 import { useTheme } from "./Context/ThemeContext";
-import CartPage from "./Pages/CartPage";
-import LogIn from "./Pages/Login";
-import SignIn from "./Pages/Signin";
-import ForgotPassword from "./Pages/ForgotPassword";
-import ResetPassword from "./Pages/ResetPassword";
-import CheckoutPage from "./Pages/CheckoutPage";
+import CartPage from "./pages/CartPage";
+import LogIn from "./pages/Login";
+import SignIn from "./pages/Signin";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+import CheckoutPage from "./pages/CheckoutPage";
 
 const App: React.FC = () => {
   const { themeColors } = useTheme();
