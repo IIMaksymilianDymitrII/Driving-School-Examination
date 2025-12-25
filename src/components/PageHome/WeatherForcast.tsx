@@ -58,10 +58,10 @@ const WeatherForcast = () => {
           {weather?.temperature}°C
         </div>
 
-        <div className="text-lg text-gray-600 Dark:text-gray-300">
+        <div className="text-lg text-gray-600 dark:text-gray-300">
           Wind: {weather?.windspeed} m/s
           <br />
-          <div className="text-lg text-red-600 Dark:text-gray-300">
+          <div className="text-lg text-red-600 dark:text-gray-300">
             <p>Tips: {weatherMessage}</p>
           </div>
         </div>
