@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import type { Event } from "../../types/Event";
-import { useBooking } from "../../Context/BookingContext";
+import { useBooking } from "../../context/BookingContext";
 import { mapEventToLesson } from "../../utils/mapEventToLesson";
 import { format } from "date-fns";
 

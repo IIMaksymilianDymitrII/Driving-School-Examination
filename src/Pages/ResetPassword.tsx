@@ -2,7 +2,7 @@ import { useState } from "react";
 import Wheel from "../assets/racing.png";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
-import { useTheme } from "../Context/ThemeContext";
+import { useTheme } from "../context/ThemeContext";
 
 const ResetPassword = () => {
   const { theme, themeColors } = useTheme();

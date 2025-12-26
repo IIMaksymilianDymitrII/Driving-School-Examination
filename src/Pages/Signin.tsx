@@ -2,7 +2,7 @@ import Wheel from "../assets/racing.png";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "../Context/ThemeContext";
+import { useTheme } from "../context/ThemeContext";
 
 const signinLink: string = "http://localhost:5000/signin";
 

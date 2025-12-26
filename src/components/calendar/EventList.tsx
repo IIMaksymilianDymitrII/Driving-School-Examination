@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import type { Event } from "../../types/Event";
-import { useTheme } from "../../Context/ThemeContext";
-import { useBooking } from "../../Context/BookingContext";
+import { useTheme } from "../../context/ThemeContext";
+import { useBooking } from "../../context/BookingContext";
 
 interface EventListProps {
   events: Event[];

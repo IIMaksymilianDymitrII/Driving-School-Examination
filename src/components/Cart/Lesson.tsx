@@ -1,4 +1,4 @@
-import { useTheme } from "../../Context/ThemeContext";
+import { useTheme } from "../../context/ThemeContext";
 
 interface LessonProps {
   id: string;

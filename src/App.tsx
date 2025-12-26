@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Header from "./common/Header";
 import HomePage from "./pages/HomePage";
 import SchedulePage from "./pages/SchedulePage";
-import { useTheme } from "./Context/ThemeContext";
+import { useTheme } from "./context/ThemeContext";
 import CartPage from "./pages/CartPage";
 import LogIn from "./pages/Login";
 import SignIn from "./pages/Signin";

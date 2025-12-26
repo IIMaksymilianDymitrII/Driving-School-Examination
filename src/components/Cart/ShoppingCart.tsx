@@ -1,4 +1,4 @@
-import { useBooking } from "../../Context/BookingContext"
+import { useBooking } from "../../context/BookingContext"
 import Lesson from "./Lesson"
 import CountPrice from "./CountPrice"
 

@@ -1,7 +1,7 @@
 import Wheel from "../assets/racing.png";
 import { useState } from "react";
 import axios from "axios";
-import { useTheme } from "../Context/ThemeContext";
+import { useTheme } from "../context/ThemeContext";
 
 const ForgotPassword = () => {
   const { theme, themeColors } = useTheme();

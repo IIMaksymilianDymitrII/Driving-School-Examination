@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useBooking } from "../Context/BookingContext";
+import { useBooking } from "../context/BookingContext";
 import drivingWizardLogo from "../assets/driving-wizard-logo.png";
-import { useTheme } from "../Context/ThemeContext";
+import { useTheme } from "../context/ThemeContext";
 import ThemeButton from "../components/Header/ThemeButton";
 
 const Header: React.FC = () => {

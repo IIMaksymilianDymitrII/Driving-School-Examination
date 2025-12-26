@@ -5,8 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider } from "./context/UserInfoContext.tsx";
-import { BookingProvider } from "./Context/BookingContext.tsx";
-import { ThemeProvider } from "./Context/ThemeContext.tsx";
+import { BookingProvider } from "./context/BookingContext.tsx";
+import { ThemeProvider } from "./context/ThemeContext.tsx";
 
 const client = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
