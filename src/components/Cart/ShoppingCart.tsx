@@ -16,8 +16,16 @@ const ShoppingCart = () => {
 
 
         { cart.map((lesson) => (
-          <Lesson date={lesson.date} time={lesson.time} instructor={lesson.instructor} title={lesson.title} 
-          location={lesson.location} id={lesson.id} remove={removeFromCart} price={lesson.price}/>
+          <Lesson 
+          date={lesson.date} 
+          time={lesson.time} 
+          instructor={lesson.instructor} 
+          title={lesson.title} 
+          location={lesson.location} 
+          duration={lesson.duration}
+          id={lesson.id} 
+          remove={removeFromCart} 
+          price={lesson.price}/>
         ))
 
         }
