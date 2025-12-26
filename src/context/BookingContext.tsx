@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
 
+import scheduleEvents from "../data/scheduleEvents";
+import { mapEventToLesson } from "../utils/mapEventToLesson";
+
 export interface Lesson {
   id: string;
   title: string;
@@ -13,13 +16,13 @@ export interface Lesson {
 }
 
 interface BookingContextValue {
-  lessons: Lesson[];
+  //lessons: Lesson[];
   cart: Lesson[];
   addToCart: (lesson: Lesson) => void;
   removeFromCart: (id: string) => void;
   clearCart: () => void;
   completePurchase: () => void;
-  todayNextLesson: Lesson | null;
+  todayLessons: Lesson[] | null;
   nextAvailableThisWeek: Lesson[];
   purchasedLessons: string[];
 }
@@ -28,54 +31,10 @@ const BookingContext = createContext<BookingContextValue | undefined>(
   undefined
 );
 
-// simple mock seed data
-const seedLessons: Lesson[] = [
-  {
-    id: "L1",
-    title: "",
-    date: "2025-12-06",
-    time: "10:00",
-    duration: 120,
-    instructor: "Anna Svensson",
-    price: 0,
-    location: "",
-  },
-  {
-    id: "L2",
-    title: "",
-    date: "2025-12-06",
-    time: "14:00",
-    duration: 60,
-    instructor: "Jonas Karlsson",
-    price: 0,
-    location: "",
-  },
-  {
-    id: "L3",
-    title: "",
-    date: "2025-12-07",
-    time: "09:00",
-    duration: 120,
-    instructor: "Anna Svensson",
-    price: 0,
-    location: "",
-  },
-  {
-    id: "L4",
-    title: "",
-    date: "2025-12-08",
-    time: "16:00",
-    duration: 60,
-    instructor: "Sara Lind",
-    price: 0,
-    location: "",
-  },
-];
 
 export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [lessons] = useState<Lesson[]>(seedLessons);
   const [cart, setCart] = useState<Lesson[]>([]);
   const [purchasedLessons, setPurchasedLessons] = useState<string[]>([]);
 
@@ -92,40 +51,62 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({
   const clearCart = () => setCart([]);
 
   const today = new Date().toISOString().slice(0, 10);
+  
+  // Updated todayNextLesson to consider purchasedLessons
+  const todayLessons = useMemo(() => {
+    const now = new Date();
+    const purchasedSet = new Set(purchasedLessons);
 
-  const todayNextLesson = useMemo(() => {
-    const todayLessons = lessons.filter((l) => l.date === today);
-    if (todayLessons.length === 0) return null;
-    // just pick first for now
-    return todayLessons[0];
-  }, [lessons, today]);
+      return scheduleEvents
+        .map(mapEventToLesson)
+        .filter((lesson) => {
+          if (lesson.date !== today) return false; // only today
+          if (!purchasedSet.has(lesson.id)) return false; // only purchased/booked
+
+          // only future lessons today (so 18:00 shows at 17:30)
+          const lessonDateTime = new Date(`${lesson.date}T${lesson.time}`);
+          return lessonDateTime >= now;
+        })
+        .sort((a, b) => a.time.localeCompare(b.time))
+        .slice(0, 5);
+    }, [today, purchasedLessons]);
+
+  //const todayNextLesson = todayLessons.length > 0 ? todayLessons[0] : null;
 
   const completePurchase = () => {
     setPurchasedLessons((prev) => [...prev, ...cart.map((l) => l.id)]);
     setCart([]);
   };
 
+  // updated nextAvailableThisWeek to consider purchasedLessons
   const nextAvailableThisWeek = useMemo(() => {
-    // very simple: all lessons in next 7 days
     const now = new Date();
-    const upper = new Date();
-    upper.setDate(now.getDate() + 7);
 
-    return lessons.filter((l) => {
-      const d = new Date(l.date);
-      return d >= now && d <= upper;
-    });
-  }, [lessons]);
+    // Map scheduleEvents to lessons and filter
+      return scheduleEvents
+      .map(mapEventToLesson)
+      .filter((lesson) => {
+        const lessonDate = new Date(`${lesson.date}T${lesson.time}`);
+        return (
+          lessonDate > now &&
+          !purchasedLessons.includes(lesson.id)
+        );
+      })
+      .sort((a, b) =>
+        `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`)
+      )
+      .slice(0, 5);
+  }, [purchasedLessons]);
+
 
   return (
     <BookingContext.Provider
       value={{
-        lessons,
         cart,
         addToCart,
         removeFromCart,
         clearCart,
-        todayNextLesson,
+        todayLessons,
         nextAvailableThisWeek,
         completePurchase,
         purchasedLessons,

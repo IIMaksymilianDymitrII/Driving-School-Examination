@@ -27,7 +27,7 @@ const NextAvailableLesson = ({
                   {slot.date} – {slot.time}
                 </div>
                 <div className={`text-xs ${themeColors.text}`}>
-                  {slot.duration} with {slot.instructor}
+                  <span>{slot.duration} min with {slot.instructor}</span>
                 </div>
               </div>
             </li>
