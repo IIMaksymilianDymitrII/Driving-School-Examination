@@ -17,7 +17,7 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={`border-b ${themeColors.border} ${themeColors.surface}`}>
+    <header className={`sticky top-0 z-50 border-b ${themeColors.border} ${themeColors.surface}`}>
 
       <div
         className={` flex justify-center items-center text-center py-2 text-sm ${themeColors.text}`}
