@@ -1,5 +1,7 @@
 import { useState } from "react";
 import type { Event } from "../types/Event";
+import { format } from "date-fns";
+
 
 export const useSchedule = (events: Event[]) => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -14,7 +16,14 @@ export const useSchedule = (events: Event[]) => {
       ev.instructor.toLowerCase().includes(q);
 
     const matchesDate = selectedDate ? ev.date === selectedDate : true;
-    return matchesSearch && matchesDate;
+
+    // NEW: only events in current calendar month
+    const currentMonth = format(currentDate, "yyyy-MM");
+    const eventMonth = ev.date.slice(0, 7); // yyyy-MM
+
+    const matchesMonth = eventMonth === currentMonth;
+
+    return matchesSearch && matchesDate && matchesMonth;
   });
 
   return {
