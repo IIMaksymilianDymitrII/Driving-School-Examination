@@ -23,9 +23,24 @@ const CalendarDay: React.FC<CalendarDayProps> = ({
   const { themeColors } = useTheme();
   const {purchasedLessons} = useBooking()
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const dayDate = new Date(day);
+  dayDate.setHours(0, 0, 0, 0);
+
+  const isPastDate = dayDate < today;
+
   const visibleEvents = useMemo(() => {
-    return events.filter((ev) => !purchasedLessons.includes(String(ev.id)));
+    const now = new Date();
+    
+    return events.filter((ev) => {
+      const eventDateTime = new Date(`${ev.date}T${ev.time}`);
+      return (eventDateTime > now && !purchasedLessons.includes(String(ev.id)));
+    });
   }, [events, purchasedLessons]);
+    // !purchasedLessons.includes(String(ev.id)));
+  // }, [events, purchasedLessons]);
 
   return (
     <div 
@@ -35,10 +50,15 @@ const CalendarDay: React.FC<CalendarDayProps> = ({
       // className={`h-28 p-1 border dark:border-gray-700 text-left relative overflow-hidden 
       // ${isCurrentMonth ? "bg-white dark:bg-gray-800" : "bg-gray-100 dark:bg-gray-700 text-gray-400"}`}
 
-      className={`h-28 p-2 border ${themeColors.border}
-      ${isCurrentMonth ? themeColors.surface : themeColors.elevated}`}
+      // className={`h-28 p-2 border ${themeColors.border}
+      // ${isCurrentMonth ? themeColors.surface : themeColors.elevated}`}
+      // onClick={onDateClick}
 
-      onClick={onDateClick}
+      onClick={!isPastDate ? onDateClick : undefined} // only allow click for non-past dates
+      className={`h-28 p-2 border ${themeColors.border}
+      ${isCurrentMonth ? themeColors.surface : themeColors.elevated}
+      ${isPastDate ? "cursor-not-allowed opacity-50" : "cursor-pointer"}
+      `}
     >
       {/* <div className="text-xs font-semibold">{format(day, "d")}</div> */}
       <div

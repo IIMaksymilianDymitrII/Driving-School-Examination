@@ -21,7 +21,16 @@ const EventList: React.FC<EventListProps> = ({
   const { purchasedLessons } = useBooking();
 
   const visibleEvents = useMemo(() => {
-    return events.filter((ev) => !purchasedLessons.includes(String(ev.id)));
+    const now = new Date();
+
+    // return events.filter((ev) => !purchasedLessons.includes(String(ev.id)));
+    return events.filter((ev) => {
+    const eventDateTime = new Date(`${ev.date}T${ev.time}`);
+    return (
+      eventDateTime >= now &&
+      !purchasedLessons.includes(String(ev.id))
+     );
+    });
   }, [events, purchasedLessons]);
 
   return (
