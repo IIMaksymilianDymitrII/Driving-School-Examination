@@ -20,6 +20,21 @@ const UpdatesNRoles = () => {
             </li>
           </ul>
 
+          <h3 className={`text-lg font-semibold mt-4 mb-3 ${themeColors.text}`}>
+            Updates from school administration
+          </h3>
+          <ul className={`space-y-2 text-green-600 text-sm ${themeColors.text}`}>
+            <li>
+              • Reminder: Bring your ID and driving logbook to every lesson.
+            </li>
+            <li>
+              • Holiday schedule updated – check the Schedules page for details.
+            </li>
+            <li>
+              • Form January, 2026, students will have 02 (two) "Mock Tests" on Saturdays. And there will be no lessons on Sundays.
+            </li>
+          </ul>
+
           <h3 className={`text-md font-semibold mt-4 mb-2 ${themeColors.text}`}>Important Links</h3>
 
           <ul className="text-blue-600 dark:text-blue-400 text-sm space-y-1">
