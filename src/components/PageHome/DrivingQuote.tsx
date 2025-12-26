@@ -10,7 +10,7 @@ const DrivingQuote = () => {
             </h1>
             <p className={`text-lg leading-relaxed ${themeColors.text}`}>
               Private driving practice is where students repeat, make mistakes
-              and improve – in their own tempo. My role is to guide you with
+              and improve – in their own tempo. Our role is to guide you with
               structured lessons, clear feedback and realistic mock tests so
               that every kilometer you drive takes you closer to a safe and
               confident driving licence.
