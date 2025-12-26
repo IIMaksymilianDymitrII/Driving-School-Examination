@@ -72,7 +72,8 @@ const EventModal: React.FC<EventModalProps> = ({ event, onClose }) => {
           </p>
           <p>
             <span className="font-semibold">Duration:</span>{" "}
-            {event.duration/60}h 
+            {/* {event.duration/60}h  */}
+            {event.duration} minutes 
           </p>
           <p>
             <span className="font-semibold">Price:</span>{" "}

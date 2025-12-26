@@ -7,6 +7,7 @@ interface LessonProps {
   time: string;
   instructor: string;
   location?: string;
+  duration: number;
   price: number;
   remove: (id: string) => void;
 }
@@ -18,6 +19,7 @@ const Lesson = ({
   time,
   instructor,
   location,
+  duration,
   price,
   remove,
 }: LessonProps) => {
@@ -34,6 +36,7 @@ const Lesson = ({
           <p>Location: {location}</p>
           <p>Date: {date}</p>
           <p>Time: {time} </p>
+          <p>Duration: {duration} minutes</p>
         </div>
       </div>
       <div className="grid grid-row-2 content-between ">
