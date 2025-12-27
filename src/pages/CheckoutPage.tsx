@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useTheme } from "../context/ThemeContext";
 import GoogleLogo from "../assets/Google__G__logo.svg.png";
 import AppleLogo from "../assets/AppleLogo.png";
 import { useBooking } from "../context/BookingContext";
+import { useNavigate } from "react-router-dom";
 
 const isValidCardNumber = (number: string) => /^[0-9]{16}$/.test(number);
 const isValidCVV = (cvv: string) => /^[0-9]{3}$/.test(cvv);
@@ -17,28 +18,38 @@ const isValidValidUntil = (date: string) => {
 };
 
 const CheckoutPage = () => {
-  const storedUser = localStorage.getItem("user");
-  const loggedInUser = storedUser ? JSON.parse(storedUser) : null;
+  const storedUser = localStorage.getItem("user"); // ok
+  const loggedInUser = storedUser ? JSON.parse(storedUser) : null; // ok
 
-  const { themeColors } = useTheme();
-  const [step, setStep] = useState(loggedInUser ? 1 : 0);
-  const [emailError, setEmailError] = useState(false);
-  const [error, setError] = useState(false);
+  const { themeColors } = useTheme(); // ok
+  const navigate = useNavigate(); // add more navigation if needed
 
-  const [cardNumberError, setCardNumberError] = useState(false);
-  const [cvvError, setCvvError] = useState(false);
-  const [validUntilError, setValidUntilError] = useState(false);
+  // form state - for new summary step
+  // const [step, setStep] = useState(loggedInUser ? 1 : 0);
+  const [step, setStep] = useState(0);
+  const [coupon, setCoupon] = useState(""); // added for discount code
+  const [emailError, setEmailError] = useState(false); // ok
+  const [error, setError] = useState(false); // ok
 
-  const [formData, setFormData] = useState({
-    email: "",
-    firstName: "",
+  const [cardNumberError, setCardNumberError] = useState(false); //ok
+  const [cvvError, setCvvError] = useState(false); // ok
+  const [validUntilError, setValidUntilError] = useState(false); // ok
+
+  const [formData, setFormData] = useState(() => ({
+    email: loggedInUser?.email ?? "",
+    firstName: loggedInUser?.name ?? "",
     lastName: "",
     cardNumber: "",
     cvv: "",
     validUntil: "",
-  });
+  }));
 
-  const { completePurchase } = useBooking();
+  const { completePurchase, cart, discountAmount, applyDiscount } = useBooking(); // ok. added discountAmount, applyDiscount
+
+  // calculate totals
+  const subtotal = cart.reduce((sum, l) => sum + l.price, 0);
+  const tax = subtotal * 0.25;
+  const total = subtotal + tax - discountAmount; // updated total with discountAmount
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -55,19 +66,68 @@ const CheckoutPage = () => {
     if (name === "validUntil" && isValidValidUntil(value))
       setValidUntilError(false);
   };
-  // skips first form
-  useEffect(() => {
-    if (loggedInUser) {
-      setFormData((prev) => ({
-        ...prev,
-        email: loggedInUser.email,
-        firstName: loggedInUser.name,
-      }));
-      setStep(1);
-    }
-  }, []);
+  
+  // formData is initialized with the logged-in user's values above to avoid calling setState inside an effect
 
   const steps = [
+    <section className={`p-4 w-[500px] ${themeColors.bgWidget} border ${themeColors.border} rounded-xl mt-[200px]`}
+        >
+          <h1 className="text-2xl font-semibold mb-4">Order Summary</h1>
+
+          <ul className="space-y-2">
+            {cart.map((l) => (
+              <li key={l.id} className="flex justify-between">
+                <span>
+                  {l.title} – {l.date} {l.time} {l.location} {l.duration} minutes with {l.instructor}
+                </span>
+                <span>{l.price} kr</span>
+              </li>
+            ))}
+          </ul>
+
+          <hr className="my-3" />
+
+          <p>Subtotal: {subtotal} kr</p>
+          <p>Tax: {tax} kr</p>
+          {discountAmount > 0 && (
+            <p className="text-green-600">
+              Discount: -{discountAmount} kr
+            </p>
+          )}
+          <p className="font-semibold">Total: {total} kr</p>
+
+          <div className="flex gap-2 mt-4">
+            <input
+              placeholder="Discount code"
+              value={coupon}
+              onChange={(e) => setCoupon(e.target.value)}
+              className={`rounded-xl pl-2 h-8 ${themeColors.elevated} border`}
+            />
+            <button
+              onClick={() => applyDiscount(coupon, subtotal + tax)}
+              className="bg-indigo-600 text-white px-4 rounded-xl"
+            >
+              Apply
+            </button>
+          </div>
+
+          <div className="flex justify-between mt-6">
+            <button
+              onClick={() => navigate("/schedules")}
+              className="underline font-semibold"
+            >
+              Add more items to cart
+            </button>
+
+            <button
+              onClick={() => setStep(1)}
+              className="bg-green-700 rounded-xl px-6 py-2 font-semibold"
+            >
+              Proceed to Checkout
+            </button>
+          </div>
+        </section>,
+
     <section
       className={`p-3 flex flex-col w-[400px] gap-2 ${themeColors.bgWidget} border ${themeColors.border} rounded-xl h-fit mt-[250px]`}
     >
@@ -109,7 +169,7 @@ const CheckoutPage = () => {
           }
           setEmailError(false);
           setError(false);
-          setStep(1);
+          setStep(2);
         }}
       >
         Next
@@ -196,10 +256,10 @@ const CheckoutPage = () => {
 
           if (hasError) return;
           completePurchase();
-          setStep(2);
+          setStep(3);
         }}
       >
-        Submit
+        Complete Purchase
       </button>
 
       <hr className="my-3" />
