@@ -70,7 +70,7 @@ const CheckoutPage = () => {
   // formData is initialized with the logged-in user's values above to avoid calling setState inside an effect
 
   const steps = [
-    <section className={`p-4 w-[500px] ${themeColors.bgWidget} border ${themeColors.border} rounded-xl mt-[200px]`}
+    <section className={`p-4 w-[auto] h-[600px] ${themeColors.bgWidget} border ${themeColors.border} rounded-xl mt-[200px]`}
         >
           <h1 className="text-2xl font-semibold mb-4">Order Summary</h1>
 
@@ -117,6 +117,13 @@ const CheckoutPage = () => {
               className="underline font-semibold"
             >
               Add more items to cart
+            </button>
+
+            <button
+              onClick={() => navigate("/cart")}
+              className="underline font-semibold"
+            >
+              Back to Cart
             </button>
 
             <button
