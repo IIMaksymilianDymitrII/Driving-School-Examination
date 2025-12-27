@@ -156,13 +156,167 @@ git clone https://github.com/your-repo/driving-school-examination.git
 # Install dependencies
 npm install
 
-# Start development server
-npm run dev
 ```
 
 ---
 
-## 📝 Project Reflection
+## Dependencies & Installation
+
+This project is built using **Vite**, **React**, **TypeScript**, and **Tailwind CSS**.
+Below are all required dependencies and setup commands.
+
+---
+
+### System Requirements
+
+- **Node.js** ≥ 18
+- **npm** ≥ 9
+  (Recommended: install via Node Version Manager – `nvm`)
+
+---
+
+## Project Setup (Vite)
+
+### 1 Create Vite Project (if starting from scratch)
+
+```bash
+npm create vite@latest driving-school-examination -- --template react-ts
+cd driving-school-examination
+npm install
+```
+
+---
+
+## Tailwind CSS Setup
+
+### 2 Install Tailwind CSS & Dependencies
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+### 3 Configure `tailwind.config.js`
+
+```ts
+/** @type {import('tailwindcss').Config} */
+export default {
+  darkMode: "class",
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+### 4 Add Tailwind to `src/index.css`
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+if this doesn't functionate, use only following:
+
+```css
+@import "tailwindcss";
+```
+
+---
+
+## Core Runtime Dependencies
+
+```bash
+npm install react-router-dom date-fns
+```
+
+| Package            | Purpose                  |
+| ------------------ | ------------------------ |
+| `react-router-dom` | Client-side routing      |
+| `date-fns`         | Date & time calculations |
+| `react`            | UI library               |
+| `react-dom`        | DOM rendering            |
+
+---
+
+## Authentication & Utilities
+
+```bash
+npm install @react-oauth/google
+```
+
+| Package               | Purpose              |
+| --------------------- | -------------------- |
+| `@react-oauth/google` | Google login support |
+
+---
+
+## Development Dependencies
+
+```bash
+npm install -D typescript
+```
+
+(Vite already includes most dev tooling by default.)
+
+---
+
+## Running the Project
+
+### Development mode
+
+```bash
+npm run dev
+```
+
+App will be available at:
+
+```
+http://localhost:5173
+```
+
+---
+
+### Production build
+
+```bash
+npm run build
+```
+
+---
+
+### Preview production build
+
+```bash
+npm run preview
+```
+
+---
+
+## Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+VITE_GOOGLE_CLIENT_ID=your_google_client_id_here
+```
+
+> ⚠️ Environment variables must start with `VITE_` to be accessible in Vite.
+
+---
+
+## Why This Stack?
+
+- **Vite** → Fast dev server & modern build pipeline
+- **React + TypeScript** → Component safety & scalability
+- **Tailwind CSS** → Rapid, consistent UI development
+- **Context API** → Global state without external libraries
+
+---
+
+## Project Reflection
 
 This project demonstrates:
 
