@@ -25,6 +25,9 @@ interface BookingContextValue {
   todayLessons: Lesson[] | null;
   nextAvailableThisWeek: Lesson[];
   purchasedLessons: string[];
+  discountCode: string | null; // New state for discount code
+  discountAmount: number; // New state for discount amount
+  applyDiscount: (code: string, total: number) => void; // New function to apply discount
 }
 
 const BookingContext = createContext<BookingContextValue | undefined>(
@@ -37,6 +40,29 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [cart, setCart] = useState<Lesson[]>([]);
   const [purchasedLessons, setPurchasedLessons] = useState<string[]>([]);
+  
+  // State for discount code and amount
+  const [discountCode, setDiscountCode] = useState<string | null>(null);
+  const [discountAmount, setDiscountAmount] = useState<number>(0);
+
+  // Function to apply discount code
+  const applyDiscount = (code: string, total: number) => {
+    if (code === "STUDENT10") {
+      setDiscountCode(code);
+      setDiscountAmount(total * 0.1);
+      return;
+    }
+
+    if (code === "WINTER20") {
+      setDiscountCode(code);
+      setDiscountAmount(total * 0.2);
+      return;
+    }
+
+    setDiscountCode(null);
+    setDiscountAmount(0);
+  };
+
 
   const addToCart = (lesson: Lesson) => {
     setCart((prev) =>
@@ -110,6 +136,9 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({
         nextAvailableThisWeek,
         completePurchase,
         purchasedLessons,
+        discountCode, // expose discount code state
+        discountAmount, // expose discount amount state
+        applyDiscount, // expose apply discount function
       }}
     >
       {children}
