@@ -33,6 +33,12 @@ const UpdatesNRoles = () => {
             <li>
               • Form January, 2026, students will have 02 (two) "Mock Tests" on Saturdays. And there will be no lessons on Sundays.
             </li>
+            <li>
+              • Winter and student discounts are available. 
+            </li>
+            <li className={'space-y-2 text-orange-500 text-sm ${themeColors.text}'}>
+              • STUDENT10 → 10% discount & WINTER20 → 20% discount on all packages booked before January 15, 2026. Don't forget to use these codes before Check Out.
+            </li>
           </ul>
 
           <h3 className={`text-md font-semibold mt-4 mb-2 ${themeColors.text}`}>Important Links</h3>
